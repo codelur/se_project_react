@@ -1,0 +1,45 @@
+@font-face {
+  src: url("../assets/cabinetgrotesk.woff") format("woff");
+  font-family: "cabinetgrotesk";
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 32px 0 28px;
+}
+
+.header__logo {
+  margin-right: 24px;
+}
+
+.header__date-and-location {
+  margin: 0px;
+  font-family: cabinetgrotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.header__add-clothes-btn {
+  margin: 0 20px 0 auto;
+  font-family: cabinetgrotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  border: 0;
+}
+
+.header__user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__username {
+  margin: 0px;
+  font-family: cabinetgrotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
