@@ -8,10 +8,15 @@ function ModalWithForm({
   activeModal,
   closeModal,
 }) {
+  const handleClickOutside = (event) => {
+    if (event.target === document.querySelector(".modal__opened")) {
+      closeModal();
+    }
+  };
   return (
     <div
       className={`modal ${activeModal === "add garment" && "modal__opened"}`}
-      onClick={closeModal}
+      onClick={handleClickOutside}
     >
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
@@ -22,7 +27,7 @@ function ModalWithForm({
         ></button>
         <form className={`modal__form modal_type_${name}`} id={name}>
           {children}
-          <button type="button" className="modal__submit">
+          <button type="button" className="modal__submit" disabled>
             {buttonText}
           </button>
         </form>

@@ -17,6 +17,7 @@
 
 .modal__close {
   background-image: url("../../assets/closeButton.svg");
+  background-color: transparent;
   position: absolute;
   top: 20px;
   right: 28px;
@@ -26,10 +27,28 @@
 }
 
 .modal__content_type_image {
-}
-
-.modal__image {
+  padding: 0;
+  overflow: hidden;
 }
 
 .modal__footer {
+  padding: 20px 0 32px 32px;
+}
+
+.modal__image {
+  object-fit: cover;
+}
+
+.modal__caption {
+  font-family: cabinetgrotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.modal__weather {
+  font-family: cabinetgrotesk, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
 }

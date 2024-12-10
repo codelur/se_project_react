@@ -86,6 +86,15 @@
 .modal__label_type_radio {
   display: flex;
   gap: 8px;
+  color: gray;
+}
+
+.modal__input_type_radio:checked {
+  accent-color: black;
+}
+
+.modal__label_type_radio:has(.modal__input_type_radio:checked) {
+  color: black;
 }
 
 .modal__submit {

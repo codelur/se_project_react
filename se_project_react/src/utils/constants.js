@@ -36,3 +36,71 @@ export const defaultClothingItems = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
   },
 ];
+
+export const weatherOptions = [
+  {
+    isDay: true,
+    condition: "storm",
+    url: new URL("./../assets/stormDay.svg", import.meta.url),
+  },
+  {
+    isDay: false,
+    condition: "storm",
+    url: new URL("./../assets/stormNight.svg", import.meta.url),
+  },
+  {
+    isDay: true,
+    condition: "clear",
+    url: new URL("./../assets/clearDay.svg", import.meta.url),
+  },
+  {
+    isDay: false,
+    condition: "clear",
+    url: new URL("./../assets/clearNight.svg", import.meta.url),
+  },
+
+  {
+    isDay: true,
+    condition: "clouds",
+    url: new URL("./../assets/cloudsDay.svg", import.meta.url),
+  },
+  {
+    isDay: false,
+    condition: "clouds",
+    url: new URL("./../assets/cloudsNight.svg", import.meta.url),
+  },
+  {
+    isDay: true,
+    condition: "rain",
+    url: new URL("./../assets/rainDay.svg", import.meta.url),
+  },
+  {
+    isDay: false,
+    condition: "rain",
+    url: new URL("./../assets/rainNight.svg", import.meta.url),
+  },
+  {
+    isDay: true,
+    condition: "snow",
+    url: new URL("./../assets/snowDay.svg", import.meta.url),
+  },
+  {
+    isDay: false,
+    condition: "snow",
+    url: new URL("./../assets/snowNight.svg", import.meta.url),
+  },
+  {
+    isDay: true,
+    condition: "atmosphere",
+    url: new URL("./../assets/atmosphereDay.svg", import.meta.url),
+  },
+  {
+    isDay: false,
+    condition: "atmosphere",
+    url: new URL("./../assets/atmosphereNight.svg", import.meta.url),
+  },
+];
+
+export const coordinates = { latitude: 34.068934, longitude: -118.280054 };
+
+export const APIkey = "eb552af63de156e5e1c51d146217d8bf";
