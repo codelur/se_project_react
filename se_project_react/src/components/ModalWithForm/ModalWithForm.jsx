@@ -22,7 +22,7 @@ function ModalWithForm({
         <h2 className="modal__title">{title}</h2>
         <button
           type="button"
-          className="modal__close"
+          className="modal__garment-close"
           onClick={closeModal}
         ></button>
         <form className={`modal__form modal_type_${name}`} id={name}>

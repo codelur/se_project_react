@@ -40,8 +40,10 @@
   margin-bottom: 24px;
 }
 
-.modal__close {
-  background-image: url("../../assets/closeButton.svg");
+.modal__garment-close {
+  background-image: url("../../assets/Union.svg");
+  background-color: white;
+  background-size: cover;
   position: absolute;
   top: 20px;
   right: 28px;
