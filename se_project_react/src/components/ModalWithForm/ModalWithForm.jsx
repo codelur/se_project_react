@@ -10,8 +10,14 @@ function ModalWithForm({
 }) {
   const handleClickOutside = (event) => {
     if (event.target === document.querySelector(".modal__opened")) {
+      deleteErrors();
       closeModal();
     }
+  };
+
+  const deleteErrors = () => {
+    const form = document.forms[name];
+    form.querySelectorAll(".modal__error").forEach((p) => p.remove());
   };
 
   const addErrorMessage = (inputs) => {
@@ -47,9 +53,8 @@ function ModalWithForm({
   const validateForm = (event) => {
     event.preventDefault();
 
+    deleteErrors();
     const form = document.forms[name];
-    form.querySelectorAll(".modal__error").forEach((p) => p.remove());
-
     const invalidInputs = getInvalidInputs(form);
     if (invalidInputs.length > 0) {
       addErrorMessage(invalidInputs);
@@ -68,7 +73,10 @@ function ModalWithForm({
         <button
           type="button"
           className="modal__garment-close"
-          onClick={closeModal}
+          onClick={() => {
+            deleteErrors();
+            closeModal();
+          }}
         ></button>
         <form
           className={`modal__form modal_type_${name}`}
@@ -76,7 +84,7 @@ function ModalWithForm({
           onSubmit={validateForm}
         >
           {children}
-          <button type="submit" className="modal__submit">
+          <button type="submit" className="modal__submit" disabled>
             {buttonText}
           </button>
         </form>
