@@ -1,4 +1,5 @@
 import "./ItemModal.css";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 function ItemModal({ activeModal, closeModal, card }) {
   const handleClickOutside = (event) => {
@@ -6,6 +7,7 @@ function ItemModal({ activeModal, closeModal, card }) {
       closeModal();
     }
   };
+
   return (
     <div
       className={`modal ${activeModal === "see preview" && "modal__opened"}`}
@@ -17,7 +19,13 @@ function ItemModal({ activeModal, closeModal, card }) {
           className="modal__close"
           onClick={closeModal}
         ></button>
-        <img src={card.link} alt={card.name} className="modal__image" />
+
+        <ImageLoader
+          src={card.link}
+          alternativeSrc={card.link}
+          alt={card.name}
+          imageClass={"modal__image"}
+        />
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather">Weather: {card.weather}</p>

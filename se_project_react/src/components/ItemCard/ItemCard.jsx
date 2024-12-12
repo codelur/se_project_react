@@ -1,4 +1,6 @@
 import "./ItemCard.css";
+import ImageLoader from "../ImageLoader/ImageLoader";
+
 function ItemCard({ item, onCardClick }) {
   const handleCardClick = () => {
     onCardClick(item);
@@ -7,7 +9,13 @@ function ItemCard({ item, onCardClick }) {
   return (
     <li className="card" onClick={handleCardClick}>
       <h2 className="card__name">{item.name}</h2>
-      <img className="card__item-image" src={item.link} alt={item.name} />
+
+      <ImageLoader
+        src={item.link}
+        alternativeSrc={item.link}
+        alt={item.name}
+        imageClass={"card__item-image"}
+      />
     </li>
   );
 }

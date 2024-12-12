@@ -8,9 +8,40 @@
 .cards__list {
   display: flex;
   flex-wrap: wrap;
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 0;
   list-style-type: none;
   gap: 21px;
   border-radius: 1px;
+}
+
+.cards__btn-randomize {
+  display: none;
+}
+
+@media screen and (max-width: 375px) {
+  .cards__btn-randomize {
+    display: block;
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-family: cabinetgrotesk, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 12px;
+    border: 0;
+    border-radius: 4px;
+  }
+
+  .cards__btn-image {
+    margin-right: 8px;
+  }
+
+  .cards__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 15px;
+  }
 }

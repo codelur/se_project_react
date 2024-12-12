@@ -1,5 +1,6 @@
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/constants";
+import ImageLoader from "../ImageLoader/ImageLoader";
 
 function WeatherCard({ weatherData }) {
   const getWeatherImage = (isDay, conditionCode) => {
@@ -37,10 +38,11 @@ function WeatherCard({ weatherData }) {
   return (
     <section className="weater-card">
       <p className="weather-card__temp">{weatherData.temp.F} &deg; F</p>
-      <img
+      <ImageLoader
         src={imageURL}
+        alternativeSrc={imageURL}
         alt={weatherData.condition}
-        className="weather-card__image"
+        imageClass={"weather-card__image"}
       />
     </section>
   );

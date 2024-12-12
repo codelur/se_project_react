@@ -101,6 +101,7 @@
 
 .modal__submit {
   font-family: cabinetgrotesk, sans-serif;
+  background-color: #000000;
   color: white;
   margin-top: 32px;
   padding: 8px 16px;
@@ -108,4 +109,12 @@
   border: 0;
   width: 124px;
   height: 36px;
+}
+
+.modal__submit:hover {
+  background-color: #00000099;
+}
+
+.modal__submit:disabled {
+  background-color: #0000004d;
 }

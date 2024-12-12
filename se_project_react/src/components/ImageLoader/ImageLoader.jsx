@@ -9,17 +9,18 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass }) {
     image.src = src;
     image.onload = () => {
       setIsLoading(false);
+      setImageUrl(src);
     };
     image.onerror = () => {
       setIsLoading(false);
       setImageUrl(alternativeSrc);
     };
-  }, [src]);
+  });
 
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <div></div>
       ) : (
         <img src={imageUrl} alt={alt} className={imageClass} />
       )}
