@@ -14,53 +14,56 @@ function ModalWithForm({
     }
   };
 
-  const validateForm = (event) => {
-    console.log("is this firing");
-    return;
-    // event.preventDefault();
-    const form = document.forms[name];
-    const inputs = form.querySelectorAll("input");
-    event.preventDefault();
-    const emptyInputs = Array.from(inputs).filter((input) => !input.value);
-    if (emptyInputs.length > 0) {
-      event.preventDefault();
-      emptyInputs.forEach((input) => {
-        input.parentNode.insertAdjacentHTML(
-          "beforeend",
-          '<p style="color: red;">This field is required</p>'
-        );
+  const addErrorMessage = (inputs) => {
+    inputs.forEach((input) => {
+      input.parentNode.insertAdjacentHTML(
+        "beforeend",
+        '<p style="color: red;" class="modal__error">This field is required</p>'
+      );
+    });
+  };
+
+  const getInvalidInputs = (form) => {
+    const invalidInputs = Array.from(form.querySelectorAll("input, fieldset"))
+      .filter((element) => {
+        if (element.tagName === "INPUT") {
+          return !element.value;
+        } else if (element.tagName === "FIELDSET") {
+          const radios = element.querySelectorAll('input[type="radio"]');
+          return !Array.from(radios).some((radio) => radio.checked);
+        }
+        return false;
+      })
+      .map((element) => {
+        if (element.tagName === "FIELDSET") {
+          return element.querySelector(".modal__label_type_radio");
+        } else {
+          return element;
+        }
       });
+    return invalidInputs;
+  };
+
+  const validateForm = (event) => {
+    event.preventDefault();
+
+    const form = document.forms[name];
+    form.querySelectorAll(".modal__error").forEach((p) => p.remove());
+
+    const invalidInputs = getInvalidInputs(form);
+    if (invalidInputs.length > 0) {
+      addErrorMessage(invalidInputs);
     } else {
       form.submit();
     }
   };
-  //   useEffect(() => {
-  //     const form = document.forms[name];
-  //     form.addEventListener("submit", function (event) {
-  //       const form = document.forms[name];
-  //       const inputs = form.querySelectorAll("input");
-  //       event.preventDefault();
-  //       const emptyInputs = Array.from(inputs).filter((input) => !input.value);
-  //       if (emptyInputs.length > 0) {
-  //         event.preventDefault();
-  //         emptyInputs.forEach((input) => {
-  //           input.parentNode.insertAdjacentHTML(
-  //             "beforeend",
-  //             '<p style="color: red;">This field is required</p>'
-  //           );
-  //         });
-  //       } else {
-  //         form.submit();
-  //       }
-  //     });
-  //   }, [activeModal]);
 
   return (
     <div
-      className={`modal ${activeModal === "add garment" && "modal__opened"}`}
+      className={`modal  ${activeModal === "add garment" && "modal__opened"}`}
       onClick={handleClickOutside}
     >
-      <div className="modal__content">
+      <div className="modal__content modal__garment">
         <h2 className="modal__title">{title}</h2>
         <button
           type="button"
@@ -73,11 +76,7 @@ function ModalWithForm({
           onSubmit={validateForm}
         >
           {children}
-          <button
-            type="submit"
-            className="modal__submit"
-            // onClick={validateForm}
-          >
+          <button type="submit" className="modal__submit">
             {buttonText}
           </button>
         </form>

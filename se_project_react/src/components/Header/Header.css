@@ -76,7 +76,6 @@
 
   .header__login-btn {
     display: block;
-    margin-bottom: 33px;
   }
 
   .header__user-container {
@@ -102,7 +101,7 @@
     border: 0;
     display: block;
     align-self: end;
-    margin: 11px 11px;
+    margin: 11px 11px 32px;
   }
 
   .header__user {

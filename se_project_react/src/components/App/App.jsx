@@ -24,6 +24,7 @@ function App() {
 
   const handleAddGarmentClick = () => {
     setActiveModal("add garment");
+    setIsMobileMenuOpened(false);
   };
 
   const handleCardClick = (card) => {
@@ -77,7 +78,6 @@ function App() {
               className="modal__input"
               id="name"
               placeholder="Name"
-              required
             />
           </label>
           <label htmlFor="imageUrl" className="modal__label">
@@ -87,7 +87,6 @@ function App() {
               className="modal__input"
               id="imageUrl"
               placeholder="Image URL"
-              required
             />
           </label>
           <fieldset className="modal__radio-buttons">
@@ -101,7 +100,6 @@ function App() {
                 id="hot"
                 name="weather"
                 className="modal__input_type_radio"
-                required
               ></input>
               Hot
             </label>
@@ -114,7 +112,6 @@ function App() {
                 id="warm"
                 name="weather"
                 className="modal__input_type_radio"
-                required
               />
               Warm
             </label>
@@ -127,7 +124,6 @@ function App() {
                 id="cold"
                 name="weather"
                 className="modal__input_type_radio"
-                required
               ></input>
               Cold
             </label>

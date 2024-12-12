@@ -75,6 +75,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  margin-bottom: 32px;
 }
 
 .modal__legend {
@@ -89,6 +90,7 @@
   display: flex;
   gap: 8px;
   color: gray;
+  margin-bottom: 8px;
 }
 
 .modal__input_type_radio:checked {
@@ -103,7 +105,6 @@
   font-family: cabinetgrotesk, sans-serif;
   background-color: #000000;
   color: white;
-  margin-top: 32px;
   padding: 8px 16px;
   border-radius: 4px;
   border: 0;
@@ -117,4 +118,20 @@
 
 .modal__submit:disabled {
   background-color: #0000004d;
+}
+
+.modal__error {
+  font-family: cabinetgrotesk, sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 375px) {
+  .modal__garment {
+    align-self: end;
+  }
+  .modal__submit {
+    width: 100%;
+  }
 }
