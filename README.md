@@ -37,7 +37,7 @@ This application utilizes an image loader component to handle unavailable image 
 
 ## Usage:
 
-Clone the repository: Use git clone https://github.com/<your-username>/<your-repo-name>.git to clone this repository locally.
+Clone the repository: Use git clone https://github.com/codelur/se_project_react.git to clone this repository locally.
 
 Install dependencies: Navigate to the cloned directory and run npm install or yarn install to install the required project dependencies.
 
@@ -54,7 +54,7 @@ Technologies:
 
 ## Links
 
-Project URL:
+Project URL: https://codelur.github.io/se_project_react/
 ReactJS - JavaScript library for building user interfaces
 OpenWeatherMap API (https://api.openweathermap.org) - Weather data provider
 
