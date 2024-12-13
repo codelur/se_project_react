@@ -1,5 +1,5 @@
 import "./ModalWithForm.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useSyncExternalStore } from "react";
 function ModalWithForm({
   children,
   title,
@@ -7,9 +7,10 @@ function ModalWithForm({
   buttonText,
   activeModal,
   closeModal,
+  isOpen,
 }) {
   const handleClickOutside = (event) => {
-    if (event.target === document.querySelector(".modal__opened")) {
+    if (event.target === document.querySelector(".modal_opened")) {
       deleteErrors();
       closeModal();
     }
@@ -65,14 +66,14 @@ function ModalWithForm({
 
   return (
     <div
-      className={`modal  ${activeModal === "add garment" && "modal__opened"}`}
+      className={`modal  ${isOpen && "modal_opened"}`}
       onClick={handleClickOutside}
     >
-      <div className="modal__content modal__garment">
+      <div className={`modal__content modal__${name}`}>
         <h2 className="modal__title">{title}</h2>
         <button
           type="button"
-          className="modal__garment-close"
+          className={`modal__close`}
           onClick={() => {
             deleteErrors();
             closeModal();

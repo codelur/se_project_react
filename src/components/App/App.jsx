@@ -23,12 +23,12 @@ function App() {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
 
   const handleAddGarmentClick = () => {
-    setActiveModal("add garment");
+    setActiveModal("add-garment");
     setIsMobileMenuOpened(false);
   };
 
   const handleCardClick = (card) => {
-    setActiveModal("see preview");
+    setActiveModal("see-preview");
     setSelectedCard(card);
   };
 
@@ -70,6 +70,7 @@ function App() {
           activeModal={activeModal}
           closeModal={closeModal}
           name="add-garment"
+          isOpen={activeModal === "add-garment"}
         >
           <label htmlFor="name" className="modal__label">
             Name
@@ -133,6 +134,7 @@ function App() {
           activeModal={activeModal}
           closeModal={closeModal}
           card={selectedCard}
+          isOpen={activeModal === "see-preview"}
         ></ItemModal>
         <Footer />
       </div>

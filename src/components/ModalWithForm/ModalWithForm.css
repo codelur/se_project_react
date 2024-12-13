@@ -11,7 +11,7 @@
   visibility: hidden;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 
@@ -40,9 +40,9 @@
   margin-bottom: 24px;
 }
 
-.modal__garment-close {
+.modal__close {
   background-image: url("../../assets/Union.svg");
-  background-color: white;
+  background-color: transparent;
   background-size: cover;
   position: absolute;
   top: 20px;
@@ -128,7 +128,7 @@
 }
 
 @media screen and (max-width: 375px) {
-  .modal__garment {
+  .modal__add-garment {
     align-self: end;
   }
   .modal__submit {

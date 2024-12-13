@@ -11,12 +11,13 @@
   visibility: hidden;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 
-.modal__close {
+.modal__image-close {
   background-image: url("../../assets/closeButton.svg");
+  background-size: cover;
   background-color: transparent;
   position: absolute;
   top: 20px;

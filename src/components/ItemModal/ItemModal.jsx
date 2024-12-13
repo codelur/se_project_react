@@ -1,22 +1,22 @@
 import "./ItemModal.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 
-function ItemModal({ activeModal, closeModal, card }) {
+function ItemModal({ activeModal, closeModal, card, isOpen }) {
   const handleClickOutside = (event) => {
-    if (event.target === document.querySelector(".modal__opened")) {
+    if (event.target === document.querySelector(".modal_opened")) {
       closeModal();
     }
   };
 
   return (
     <div
-      className={`modal ${activeModal === "see preview" && "modal__opened"}`}
+      className={`modal ${isOpen && "modal_opened"}`}
       onClick={handleClickOutside}
     >
       <div className="modal__content modal__content_type_image">
         <button
           type="button"
-          className="modal__close"
+          className="modal__image-close"
           onClick={closeModal}
         ></button>
 

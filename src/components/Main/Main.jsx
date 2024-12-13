@@ -28,7 +28,7 @@ function Main({ weatherData, handleCardClick }) {
           })}
       </ul>
       <button className="cards__btn-randomize">
-        <img src={randomize} className="cards__btn-image" />
+        <img src={randomize} className="cards__btn-image" alt="randomize" />
         Randomize
       </button>
     </main>

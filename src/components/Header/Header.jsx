@@ -19,7 +19,7 @@ function Header({
     <header className="header">
       <div className={`header__menu ${isMobileMenuOpened ? "hidden" : ""}`}>
         <div className="header__login">
-          <img src={logo} alt="" className="header__logo" />
+          <img src={logo} alt="Logo" className="header__logo" />
 
           <button
             type="button"
