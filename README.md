@@ -10,7 +10,7 @@ Responsive Weather App with Clothing Recommendations (ReactJS)
 
 ## Description:
 
-This responsive web application, built with ReactJS, offers a user-friendly interface for displaying the current weather and location, along with a dynamic weather bar and a list of recommended clothing items based on the weather conditions. Users can also add custom clothing elements through a validated form.
+This responsive web application, built with ReactJS, offers a user-friendly interface for displaying the current weather and location, along with a dynamic weather bar and a list of recommended clothing items based on the weather conditions. Users can also add custom clothing elements through a validated form. An image loader component ensures that alternative images are displayed for unavailable image URLs.
 
 ## Features:
 
@@ -31,7 +31,11 @@ https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR
 
 This application integrates with the OpenWeatherMap API (https://api.openweathermap.org) to retrieve real-time weather data. You'll need to create an account and obtain an API key to use the API in your project.
 
-## sage:
+## Image Handling and Image Loader Component:
+
+This application utilizes an image loader component to handle unavailable image URLs. When an image URL in the clothing data is unavailable, the component displays an alternative image. This ensures a smooth user experience by preventing broken image links.
+
+## Usage:
 
 Clone the repository: Use git clone https://github.com/<your-username>/<your-repo-name>.git to clone this repository locally.
 
@@ -56,6 +60,16 @@ OpenWeatherMap API (https://api.openweathermap.org) - Weather data provider
 
 ## License
 
+MIT License
+
 ## Contributing
 
-Contribute
+Here are some ways you can contribute:
+
+Bug reports: If you find a bug, please create a new issue on GitHub with a clear description of the problem.
+
+Feature requests: If you have an idea for a new feature, please create a new issue on GitHub.
+
+Pull requests: We encourage you to fork the repository, make changes, and submit a pull request. Please ensure your pull request follows our coding conventions (if any) and includes clear documentation for any new features.
+
+Code reviews: Help us improve the code quality by reviewing pull requests from others.
