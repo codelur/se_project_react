@@ -57,3 +57,5 @@ OpenWeatherMap API (https://api.openweathermap.org) - Weather data provider
 ## License
 
 ## Contributing
+
+Contribute
