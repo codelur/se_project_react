@@ -105,5 +105,8 @@ export const coordinates = { latitude: 34.068934, longitude: -118.280054 };
 
 export const APIkey = "eb552af63de156e5e1c51d146217d8bf";
 
-export const avatarSrc = "src/assets/avatar.svg";
-export const altAvatarSrc = "src/assets/alternativeAvatar.svg";
+export const avatarSrc = new URL("./../assets/avatar.svg", import.meta.url);
+export const altAvatarSrc = new URL(
+  "./../assets/alternativeAvatar.svg",
+  import.meta.url
+);
