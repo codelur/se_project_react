@@ -1,4 +1,7 @@
 export const getWeather = ({ latitude, longitude }, APIkey) => {
+  const key = process.env.REACT_APP_API_KEY;
+  console.log(key);
+  console.log(process.env);
   return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}
 `).then((res) => {
     if (res.ok) {

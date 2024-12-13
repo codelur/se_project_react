@@ -84,7 +84,7 @@ function ModalWithForm({
           onSubmit={validateForm}
         >
           {children}
-          <button type="submit" className="modal__submit" disabled>
+          <button type="submit" className="modal__submit">
             {buttonText}
           </button>
         </form>
