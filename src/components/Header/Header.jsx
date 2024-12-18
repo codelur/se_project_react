@@ -3,7 +3,7 @@ import logo from "../../assets/logo.svg";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import { avatarSrc, altAvatarSrc } from "../../utils/constants";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-
+import { Link } from "react-router-dom";
 function Header({
   handleAddGarmentClick,
   weatherData,
@@ -20,8 +20,9 @@ function Header({
     <header className="header">
       <div className={`header__menu ${isMobileMenuOpened ? "hidden" : ""}`}>
         <div className="header__login">
-          <img src={logo} alt="Logo" className="header__logo" />
-
+          <Link to="/">
+            <img src={logo} alt="Logo" className="header__logo" />
+          </Link>
           <button
             type="button"
             className="header__login-btn"
@@ -46,15 +47,17 @@ function Header({
         >
           + Add clothes
         </button>
-        <div className="header__user">
-          <p className="header__username">Terrence Tegegne</p>
-          <ImageLoader
-            src={avatarSrc}
-            alternativeSrc={altAvatarSrc}
-            alt={"Terrence Tegegne"}
-            imageClass={"header__avatar"}
-          />
-        </div>
+        <Link to="/profile" className="header__link">
+          <div className="header__user">
+            <p className="header__username">Terrence Tegegne</p>
+            <ImageLoader
+              src={avatarSrc}
+              alternativeSrc={altAvatarSrc}
+              alt={"Terrence Tegegne"}
+              imageClass={"header__avatar"}
+            />
+          </div>
+        </Link>
         <button className="header__close" onClick={mobileMenuHandler}></button>
       </div>
     </header>

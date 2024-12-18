@@ -6,59 +6,17 @@ function ModalWithForm({
   buttonText,
   closeModal,
   isOpen,
+  onSubmit,
 }) {
-  const handleClickOutside = (event) => {
-    if (event.target === document.querySelector(".modal_opened")) {
-      deleteErrors();
-      closeModal();
-    }
-  };
-
   const deleteErrors = () => {
     const form = document.forms[name];
     form.querySelectorAll(".modal__error").forEach((p) => p.remove());
   };
 
-  const addErrorMessage = (inputs) => {
-    inputs.forEach((input) => {
-      input.parentNode.insertAdjacentHTML(
-        "beforeend",
-        '<p style="color: red;" class="modal__error">This field is required</p>'
-      );
-    });
-  };
-
-  const getInvalidInputs = (form) => {
-    const invalidInputs = Array.from(form.querySelectorAll("input, fieldset"))
-      .filter((element) => {
-        if (element.tagName === "INPUT") {
-          return !element.value;
-        } else if (element.tagName === "FIELDSET") {
-          const radios = element.querySelectorAll('input[type="radio"]');
-          return !Array.from(radios).some((radio) => radio.checked);
-        }
-        return false;
-      })
-      .map((element) => {
-        if (element.tagName === "FIELDSET") {
-          return element.querySelector(".modal__label_type_radio");
-        } else {
-          return element;
-        }
-      });
-    return invalidInputs;
-  };
-
-  const validateForm = (event) => {
-    event.preventDefault();
-
-    deleteErrors();
-    const form = document.forms[name];
-    const invalidInputs = getInvalidInputs(form);
-    if (invalidInputs.length > 0) {
-      addErrorMessage(invalidInputs);
-    } else {
-      form.submit();
+  const handleClickOutside = (event) => {
+    if (event.target === document.querySelector(".modal_opened")) {
+      deleteErrors();
+      closeModal();
     }
   };
 
@@ -80,7 +38,7 @@ function ModalWithForm({
         <form
           className={`modal__form modal_type_${name}`}
           id={name}
-          onSubmit={validateForm}
+          onSubmit={onSubmit}
         >
           {children}
           <button type="submit" className="modal__submit">
