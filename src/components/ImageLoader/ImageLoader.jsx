@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function ImageLoader({ src, alternativeSrc, alt, imageClass }) {
   const [isLoading, setIsLoading] = useState(true);

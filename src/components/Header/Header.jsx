@@ -2,6 +2,7 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import { avatarSrc, altAvatarSrc } from "../../utils/constants";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({
   handleAddGarmentClick,
@@ -37,6 +38,7 @@ function Header({
           !isMobileMenuOpened ? "hidden" : ""
         } `}
       >
+        <ToggleSwitch />
         <button
           type="button"
           className="header__add-clothes-btn"

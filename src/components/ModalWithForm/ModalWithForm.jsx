@@ -1,5 +1,4 @@
 import "./ModalWithForm.css";
-import React, { useEffect, useSyncExternalStore } from "react";
 function ModalWithForm({
   children,
   title,
