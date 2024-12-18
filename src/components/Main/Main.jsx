@@ -3,13 +3,20 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 import randomize from "../../assets/aroundArrow.svg";
+import React from "react";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+
 function Main({ weatherData, handleCardClick }) {
+  const { currentTemperatureUnit } = React.useContext(
+    CurrentTemperatureUnitContext
+  );
   return (
     <main>
       <WeatherCard weatherData={weatherData} />
       <section className="cards">
         <p className="cards__text">
-          Today is {weatherData.temp.F}&deg;F / You may want to wear:
+          Today is {`${weatherData.temp[currentTemperatureUnit]}`}°{" "}
+          {currentTemperatureUnit} / You may want to wear:
         </p>
       </section>
       <ul className="cards__list">

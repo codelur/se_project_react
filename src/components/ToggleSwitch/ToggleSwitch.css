@@ -26,9 +26,11 @@
 }
 
 .switch__slider-F {
+  right: 2px;
 }
 
 .switch__slider-C {
+  left: 2px;
 }
 
 .switch__temp-F {

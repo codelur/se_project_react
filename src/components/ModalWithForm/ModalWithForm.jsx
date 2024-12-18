@@ -4,7 +4,6 @@ function ModalWithForm({
   title,
   name,
   buttonText,
-  activeModal,
   closeModal,
   isOpen,
 }) {

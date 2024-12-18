@@ -1,8 +1,13 @@
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/constants";
 import ImageLoader from "../ImageLoader/ImageLoader";
+import React from "react";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function WeatherCard({ weatherData }) {
+  const { currentTemperatureUnit } = React.useContext(
+    CurrentTemperatureUnitContext
+  );
   const getWeatherImage = (isDay, conditionCode) => {
     if (conditionCode === undefined) return "";
     const firstLetterOfConditionCode = conditionCode.toString().charAt(0);
@@ -37,7 +42,10 @@ function WeatherCard({ weatherData }) {
 
   return (
     <section className="weater-card">
-      <p className="weather-card__temp">{weatherData.temp.F} &deg; F</p>
+      <p className="weather-card__temp">
+        {`${weatherData.temp[currentTemperatureUnit]}`}°{" "}
+        {currentTemperatureUnit}
+      </p>
       <ImageLoader
         src={imageURL}
         alternativeSrc={imageURL}

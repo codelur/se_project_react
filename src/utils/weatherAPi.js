@@ -26,7 +26,10 @@ const isDay = ({ sunrise, sunset }, now) => {
 export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
-  result.temp = { F: Math.floor(data.main.temp) };
+  result.temp = {
+    F: Math.floor(data.main.temp),
+    C: Math.round(((data.main.temp - 32) * 5) / 9),
+  };
   result.type = getWeatherType(result.temp.F);
   result.condition = data.weather[0].main.toLowerCase();
   result.isDay = isDay(data.sys, new Date() / 1000);

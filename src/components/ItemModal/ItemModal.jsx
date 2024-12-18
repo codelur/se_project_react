@@ -1,7 +1,7 @@
 import "./ItemModal.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 
-function ItemModal({ activeModal, closeModal, card, isOpen }) {
+function ItemModal({ closeModal, card, isOpen }) {
   const handleClickOutside = (event) => {
     if (event.target === document.querySelector(".modal_opened")) {
       closeModal();
