@@ -18,7 +18,7 @@ function Header({
 
   return (
     <header className="header">
-      <div className={`header__menu ${isMobileMenuOpened ? "hidden" : ""}`}>
+      <div className={`header__menu`}>
         <div className="header__login">
           <Link to="/">
             <img src={logo} alt="Logo" className="header__logo" />

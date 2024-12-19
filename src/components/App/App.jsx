@@ -93,7 +93,7 @@ function App() {
     }
   };
 
-  const validateForm = (event, item) => {
+  const validateForm = async (event, item) => {
     event.preventDefault();
 
     let hasErrors = false;
@@ -110,7 +110,8 @@ function App() {
     if (!hasErrors) {
       const id = getFirstAvailableId(clothingItems);
       item._id = id;
-      addItem(item, clothingItems)
+
+      await addItem(item, clothingItems)
         .then(() => {
           setActiveModal("");
           setClothingItems([item, ...clothingItems]);

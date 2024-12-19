@@ -52,6 +52,12 @@
   line-height: 25px;
 }
 
+.header__login {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .header__login-btn {
   background-image: url("../../assets/infoButton.svg");
   background-size: cover;
@@ -80,6 +86,7 @@
     align-items: normal;
     width: 100%;
     justify-content: space-between;
+    margin-bottom: 20px;
   }
 
   .header__login {
@@ -101,6 +108,11 @@
     width: 100%;
     gap: 0;
     padding-bottom: 40px;
+    border-radius: 8px;
+    position: absolute;
+    top: 18px;
+    z-index: 1;
+    width: 328px;
   }
 
   .header__date-and-location {

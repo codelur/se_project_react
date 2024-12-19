@@ -13,22 +13,21 @@ function getItems() {
   });
 }
 
-function addItem(data) {
-  return fetch(`${baseUrl}/items`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      return response.ok
-        ? response.json()
-        : Promise.reject(`Error: ${response.status}`);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+async function addItem(data) {
+  try {
+    const response = await fetch(`${baseUrl}/items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+    return await (response.ok
+      ? response.json()
+      : Promise.reject(`Error: ${response.status}`));
+  } catch (error) {
+    console.error("Error:", error);
+  }
 }
 
 function deleteItem(id) {
