@@ -1,11 +1,15 @@
 import "./ItemModal.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 
-function ItemModal({ closeModal, card, isOpen }) {
+function ItemModal({ closeModal, card, isOpen, onDeleteItem }) {
   const handleClickOutside = (event) => {
     if (event.target === document.querySelector(".modal_opened")) {
       closeModal();
     }
+  };
+
+  const deleteItem = () => {
+    onDeleteItem(card._id);
   };
 
   return (
@@ -21,14 +25,25 @@ function ItemModal({ closeModal, card, isOpen }) {
         ></button>
 
         <ImageLoader
-          src={card.link}
-          alternativeSrc={card.link}
+          src={card.imageUrl}
+          alternativeSrc={card.imageUrl}
           alt={card.name}
           imageClass={"modal__image"}
         />
         <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
+          <div className="modal__info">
+            <h2 className="modal__caption">{card.name}</h2>
+            <p className="modal__weather">Weather: {card.weather}</p>
+          </div>
+          <div className="modal__delete">
+            <button
+              type="button"
+              className="modal__delete-clothes-btn"
+              onClick={deleteItem}
+            >
+              Delete item
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -23,10 +23,11 @@
   text-align: center;
   cursor: pointer;
   position: absolute;
+  transition: left 0.5s ease-in-out;
 }
 
 .switch__slider-F {
-  right: 2px;
+  left: 26px;
 }
 
 .switch__slider-C {
@@ -38,13 +39,20 @@
   text-align: center;
   right: 10px;
 }
-
 .switch__temp-C {
   position: absolute;
   text-align: center;
   left: 10px;
 }
 
+p {
+  transition: color 1s ease-in-out;
+}
+
 .switch__active {
   color: white;
+}
+
+.switch__inactive {
+  color: black;
 }

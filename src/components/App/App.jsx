@@ -13,6 +13,13 @@ import { getWeather, filterWeatherData } from "../../utils/weatherAPi";
 
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { coordinates, APIkey } from "../../utils/constants";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  getFirstAvailableId,
+} from "../../utils/api";
+
 import "./App.css";
 
 function App() {
@@ -28,6 +35,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({ link: "" });
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([{}]);
 
   const handleAddGarmentClick = () => {
     setActiveModal("add-garment");
@@ -56,6 +64,14 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
+  const getClothingItems = () => {
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -63,7 +79,10 @@ function App() {
         setWeatherData(filteredData);
       })
       .catch(console.error);
+    getClothingItems();
   }, []);
+
+  //same as adding it in the previous useEffect
 
   const deleteErrors = (form) => {
     form.querySelectorAll(".modal__error").forEach((p) => p.remove());
@@ -99,7 +118,7 @@ function App() {
     return invalidInputs;
   };
 
-  const validateForm = (event) => {
+  const validateForm = (event, item) => {
     event.preventDefault();
 
     const form = event.target;
@@ -108,8 +127,27 @@ function App() {
     if (invalidInputs.length > 0) {
       addErrorMessage(invalidInputs);
     } else {
-      form.submit();
+      const id = getFirstAvailableId(clothingItems);
+      item._id = id;
+      addItem(item, clothingItems)
+        .then(() => {
+          setActiveModal("");
+          setClothingItems([item, ...clothingItems]);
+        })
+        .catch(console.error);
     }
+  };
+
+  const onDeleteItem = (id) => {
+    deleteItem(id)
+      .then(() => {
+        setActiveModal("");
+        const newclothingItems = clothingItems.filter(
+          (item) => item._id !== id
+        );
+        setClothingItems(newclothingItems);
+      })
+      .catch(console.error);
   };
 
   return (
@@ -132,15 +170,25 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
                 />
               }
             ></Route>
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  handleCardClick={handleCardClick}
+                  handleAddGarmentClick={handleAddGarmentClick}
+                />
+              }
+            />
           </Routes>
           <ItemModal
             closeModal={closeModal}
             card={selectedCard}
             isOpen={activeModal === "see-preview"}
+            onDeleteItem={onDeleteItem}
           ></ItemModal>
           <AddItemModal
             closeModal={closeModal}
