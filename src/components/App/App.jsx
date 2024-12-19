@@ -180,6 +180,7 @@ function App() {
                 <Profile
                   handleCardClick={handleCardClick}
                   handleAddGarmentClick={handleAddGarmentClick}
+                  clothingItems={clothingItems}
                 />
               }
             />
