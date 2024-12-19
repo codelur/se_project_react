@@ -53,6 +53,7 @@ function App() {
   };
 
   const closeModal = () => {
+    setFormAddItemErrors({});
     setActiveModal("");
   };
 
@@ -89,6 +90,7 @@ function App() {
 
   const handleClickOutside = (event) => {
     if (event.target === document.querySelector(".modal_opened")) {
+      setFormAddItemErrors({});
       closeModal();
     }
   };

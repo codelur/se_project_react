@@ -99,62 +99,8 @@
     {
       "name": "Loafers",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 19
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 20
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 21
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 22
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 23
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 24
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 25
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 26
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "cold",
-      "_id": 27
-    },
-    {
-      "name": "Loafers",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
       "weather": "warm",
-      "_id": 31
+      "_id": 32
     }
   ]
 }
