@@ -50,6 +50,11 @@
   width: 20px;
   height: 20px;
   border: 0;
+  cursor: pointer;
+}
+
+.modal__confirm {
+  cursor: pointer;
 }
 
 .modal__label {
@@ -58,6 +63,10 @@
   font-size: 16px;
   line-height: 20px;
   margin-bottom: 24px;
+}
+
+.modal__error {
+  color: red;
 }
 
 .modal__input {
@@ -110,6 +119,7 @@
   border: 0;
   width: 124px;
   height: 36px;
+  cursor: pointer;
 }
 
 .modal__submit:hover {

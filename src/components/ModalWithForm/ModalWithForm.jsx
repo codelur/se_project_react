@@ -7,19 +7,8 @@ function ModalWithForm({
   closeModal,
   isOpen,
   onSubmit,
+  handleClickOutside,
 }) {
-  const deleteErrors = () => {
-    const form = document.forms[name];
-    form.querySelectorAll(".modal__error").forEach((p) => p.remove());
-  };
-
-  const handleClickOutside = (event) => {
-    if (event.target === document.querySelector(".modal_opened")) {
-      deleteErrors();
-      closeModal();
-    }
-  };
-
   return (
     <div
       className={`modal  ${isOpen && "modal_opened"}`}
@@ -30,10 +19,7 @@ function ModalWithForm({
         <button
           type="button"
           className={`modal__close`}
-          onClick={() => {
-            deleteErrors();
-            closeModal();
-          }}
+          onClick={closeModal}
         ></button>
         <form
           className={`modal__form modal_type_${name}`}

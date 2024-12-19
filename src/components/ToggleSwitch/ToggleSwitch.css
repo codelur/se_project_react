@@ -4,6 +4,7 @@
   width: 56px;
   height: 28px;
   align-items: center;
+  cursor: pointer;
 }
 
 .switch__box {
@@ -21,7 +22,6 @@
   background-color: black;
   color: white;
   text-align: center;
-  cursor: pointer;
   position: absolute;
   transition: left 0.5s ease-in-out;
 }

@@ -1,17 +1,16 @@
 import "./ItemModal.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
-function ItemModal({ closeModal, card, isOpen, onDeleteItem }) {
-  const handleClickOutside = (event) => {
-    if (event.target === document.querySelector(".modal_opened")) {
-      closeModal();
-    }
-  };
-
-  const deleteItem = () => {
-    onDeleteItem(card._id);
-  };
-
+function ItemModal({
+  closeModal,
+  card,
+  isOpen,
+  onDeleteItem,
+  handleClickOutside,
+  openConfirmationModal,
+  activeModal,
+}) {
   return (
     <div
       className={`modal ${isOpen && "modal_opened"}`}
@@ -39,13 +38,22 @@ function ItemModal({ closeModal, card, isOpen, onDeleteItem }) {
             <button
               type="button"
               className="modal__delete-clothes-btn"
-              onClick={deleteItem}
+              onClick={openConfirmationModal}
             >
               Delete item
             </button>
           </div>
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={activeModal === "confirmation-modal"}
+        card={card}
+        confirmationInfo="Are you sure you want to delete this item?This action is irreversible."
+        buttonText="Yes, delete item"
+        onConfirmation={onDeleteItem}
+        handleClickOutside={handleClickOutside}
+        closeModal={closeModal}
+      />
     </div>
   );
 }

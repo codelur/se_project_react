@@ -17,6 +17,7 @@
   font-size: 20px;
   line-height: 25px;
   border: 0;
+  cursor: pointer;
 }
 
 .clothes-section__items {

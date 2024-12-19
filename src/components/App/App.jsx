@@ -36,6 +36,7 @@ function App() {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([{}]);
+  const [formAddItemErrors, setFormAddItemErrors] = useState({});
 
   const handleAddGarmentClick = () => {
     setActiveModal("add-garment");
@@ -45,6 +46,10 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("see-preview");
     setSelectedCard(card);
+  };
+
+  const openConfirmationModal = () => {
+    setActiveModal("confirmation-modal");
   };
 
   const closeModal = () => {
@@ -82,60 +87,38 @@ function App() {
     getClothingItems();
   }, []);
 
-  //same as adding it in the previous useEffect
-
-  const deleteErrors = (form) => {
-    form.querySelectorAll(".modal__error").forEach((p) => p.remove());
-  };
-
-  const addErrorMessage = (inputs) => {
-    inputs.forEach((input) => {
-      input.parentNode.insertAdjacentHTML(
-        "beforeend",
-        '<p style="color: red;" class="modal__error">This field is required</p>'
-      );
-    });
-  };
-
-  const getInvalidInputs = (form) => {
-    const invalidInputs = Array.from(form.querySelectorAll("input, fieldset"))
-      .filter((element) => {
-        if (element.tagName === "INPUT") {
-          return !element.value;
-        } else if (element.tagName === "FIELDSET") {
-          const radios = element.querySelectorAll('input[type="radio"]');
-          return !Array.from(radios).some((radio) => radio.checked);
-        }
-        return false;
-      })
-      .map((element) => {
-        if (element.tagName === "FIELDSET") {
-          return element.querySelector(".modal__label_type_radio");
-        } else {
-          return element;
-        }
-      });
-    return invalidInputs;
+  const handleClickOutside = (event) => {
+    if (event.target === document.querySelector(".modal_opened")) {
+      closeModal();
+    }
   };
 
   const validateForm = (event, item) => {
     event.preventDefault();
 
-    const form = event.target;
-    deleteErrors(form);
-    const invalidInputs = getInvalidInputs(form);
-    if (invalidInputs.length > 0) {
-      addErrorMessage(invalidInputs);
-    } else {
+    let hasErrors = false;
+    const errors = {};
+
+    for (const field in item) {
+      if (!item[field]) {
+        errors[field] = `${field} is required`;
+        hasErrors = true;
+      }
+    }
+
+    setFormAddItemErrors(errors);
+    if (!hasErrors) {
       const id = getFirstAvailableId(clothingItems);
       item._id = id;
       addItem(item, clothingItems)
         .then(() => {
           setActiveModal("");
           setClothingItems([item, ...clothingItems]);
+          return true;
         })
         .catch(console.error);
     }
+    return false;
   };
 
   const onDeleteItem = (id) => {
@@ -190,11 +173,16 @@ function App() {
             card={selectedCard}
             isOpen={activeModal === "see-preview"}
             onDeleteItem={onDeleteItem}
+            handleClickOutside={handleClickOutside}
+            openConfirmationModal={openConfirmationModal}
+            activeModal={activeModal}
           ></ItemModal>
           <AddItemModal
             closeModal={closeModal}
             isOpen={activeModal === "add-garment"}
             onAddItem={validateForm}
+            formAddItemErrors={formAddItemErrors}
+            handleClickOutside={handleClickOutside}
           />
           <Footer />
         </CurrentTemperatureUnitContext.Provider>

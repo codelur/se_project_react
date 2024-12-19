@@ -1,28 +1,38 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({ closeModal, onAddItem, isOpen }) {
+function AddItemModal({
+  closeModal,
+  onAddItem,
+  isOpen,
+  formAddItemErrors,
+  handleClickOutside,
+}) {
   const [name, setName] = useState("");
   const handleNameChange = (event) => {
     setName(event.target.value);
+    formAddItemErrors.name = "";
   };
 
   const [imageUrl, setImageUrl] = useState("");
   const handleImageUrlChange = (event) => {
     setImageUrl(event.target.value);
+    formAddItemErrors.imageUrl = "";
   };
 
   const [weather, SetWeather] = useState("");
   const handleWeatherChange = (event) => {
     SetWeather(event.target.id);
+    formAddItemErrors.weather = "";
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onAddItem(event, { name, imageUrl, weather });
-    setName("");
-    setImageUrl("");
-    SetWeather("");
+    if (onAddItem(event, { name, imageUrl, weather })) {
+      setName("");
+      setImageUrl("");
+      SetWeather("");
+    }
   };
 
   return (
@@ -33,6 +43,7 @@ function AddItemModal({ closeModal, onAddItem, isOpen }) {
       name="add-garment"
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      handleClickOutside={handleClickOutside}
     >
       <label htmlFor="name" className="modal__label">
         Name
@@ -45,6 +56,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen }) {
           onChange={handleNameChange}
           value={name}
         />
+        {formAddItemErrors.name && (
+          <p className="modal__error">This field is required</p>
+        )}
       </label>
       <label htmlFor="imageUrl" className="modal__label">
         Image
@@ -57,6 +71,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen }) {
           onChange={handleImageUrlChange}
           value={imageUrl}
         />
+        {formAddItemErrors.imageUrl && (
+          <p className="modal__error">This field is required</p>
+        )}
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
@@ -93,6 +110,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen }) {
           ></input>
           Cold
         </label>
+        {formAddItemErrors.weather && (
+          <p className="modal__error">This field is required</p>
+        )}
       </fieldset>
     </ModalWithForm>
   );
