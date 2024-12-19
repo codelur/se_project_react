@@ -43,9 +43,6 @@
   object-fit: cover;
 }
 
-.modal__delete {
-}
-
 .modal__delete-clothes-btn {
   border: 0;
   background-color: transparent;
