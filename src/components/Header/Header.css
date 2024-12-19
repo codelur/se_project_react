@@ -72,22 +72,25 @@
 }
 
 @media screen and (max-width: 375px) {
+  .header {
+    padding: 18px 0 0;
+  }
   .header__menu {
     display: flex;
     align-items: normal;
-    flex-direction: column;
     width: 100%;
+    justify-content: space-between;
   }
 
   .header__login {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 32px;
+    width: 100%;
   }
 
   .header__login-btn {
     display: block;
+    margin-left: auto;
   }
 
   .header__user-container {
@@ -97,10 +100,15 @@
     align-items: center;
     width: 100%;
     gap: 0;
+    padding-bottom: 40px;
   }
 
   .header__date-and-location {
     display: block;
+    font-family: cabinetgrotesk, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
   }
 
   .header__close {
@@ -116,13 +124,17 @@
     margin: 11px 11px 32px;
   }
 
+  .header__logo {
+    margin-right: 12px;
+  }
+
   .header__user {
     margin-bottom: 24px;
   }
 
   .header__add-clothes-btn {
     background-color: white;
-    margin: 0 0 60px 0;
+    margin: 0 0 24px 0;
     align-self: center;
   }
 

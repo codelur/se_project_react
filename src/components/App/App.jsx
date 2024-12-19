@@ -57,7 +57,7 @@ function App() {
   };
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpened(true);
+    setIsMobileMenuOpened(!isMobileMenuOpened);
   };
 
   const mobileMenuHandler = () => {

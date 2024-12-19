@@ -11,7 +11,15 @@ function SideBar() {
         alt={"Terrence Tegegne"}
         imageClass={"sidebar__avatar"}
       />
-      <p className="sidebar__username">Terrence Tegegne</p>
+      <div className="sidebar__profile_options">
+        <p className="sidebar__username">Terrence Tegegne</p>
+        <button type="button" className="sidebar__change-profile">
+          Change profile data
+        </button>
+        <button type="button" className="sidebar__logout">
+          Log out
+        </button>
+      </div>
     </div>
   );
 }

@@ -29,3 +29,17 @@
   gap: 20px;
   border-radius: 1px;
 }
+
+@media screen and (max-width: 375px) {
+  .clothes-section__header {
+    justify-content: space-between;
+  }
+
+  .clothes-section__add-clothes-btn {
+    color: #00000099;
+  }
+
+  .clothes-section__items {
+    gap: 12px;
+  }
+}

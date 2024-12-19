@@ -23,15 +23,15 @@ function Header({
           <Link to="/">
             <img src={logo} alt="Logo" className="header__logo" />
           </Link>
+          <p className="header__date-and-location">
+            {currentDate}, {weatherData.city}
+          </p>
           <button
             type="button"
             className="header__login-btn"
             onClick={toggleMobileMenu}
           ></button>
         </div>
-        <p className="header__date-and-location">
-          {currentDate}, {weatherData.city}
-        </p>
       </div>
 
       <div
@@ -47,7 +47,7 @@ function Header({
         >
           + Add clothes
         </button>
-        <Link to="/profile" className="header__link">
+        <Link to="/profile" className="header__link" onClick={toggleMobileMenu}>
           <div className="header__user">
             <p className="header__username">Terrence Tegegne</p>
             <ImageLoader

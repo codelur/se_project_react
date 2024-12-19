@@ -69,3 +69,12 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+@media screen and (max-width: 375px) {
+  .modal__message {
+    width: 80%;
+  }
+  .modal__confirmation-content {
+    max-width: 350px;
+  }
+}
