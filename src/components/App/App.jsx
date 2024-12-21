@@ -35,7 +35,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({ link: "" });
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  const [clothingItems, setClothingItems] = useState([{}]);
+  const [clothingItems, setClothingItems] = useState([]);
   const [formAddItemErrors, setFormAddItemErrors] = useState({});
 
   const handleAddGarmentClick = () => {

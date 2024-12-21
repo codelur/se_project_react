@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "_id": 0,
-      "name": "Beanie",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
-    },
-    {
       "_id": 1,
       "name": "Boot",
       "weather": "cold",
@@ -112,13 +106,13 @@
       "name": "Loafers",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
       "weather": "cold",
-      "_id": 0.26352823648308243
+      "_id": 0.07621481719052459
     },
     {
       "name": "Loafers",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
       "weather": "cold",
-      "_id": 0.07621481719052459
+      "_id": 0.5569580364351796
     }
   ]
 }
