@@ -99,14 +99,26 @@
     {
       "name": "Loafers",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "warm",
-      "_id": 32
+      "weather": "cold",
+      "_id": 34
     },
     {
       "name": "Loafers",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
-      "weather": "warm",
-      "_id": 33
+      "weather": "cold",
+      "_id": 35
+    },
+    {
+      "name": "Loafers",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
+      "weather": "cold",
+      "_id": 0.26352823648308243
+    },
+    {
+      "name": "Loafers",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030",
+      "weather": "cold",
+      "_id": 0.07621481719052459
     }
   ]
 }

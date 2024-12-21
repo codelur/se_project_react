@@ -7,13 +7,9 @@ function ModalWithForm({
   closeModal,
   isOpen,
   onSubmit,
-  handleClickOutside,
 }) {
   return (
-    <div
-      className={`modal  ${isOpen && "modal_opened"}`}
-      onClick={handleClickOutside}
-    >
+    <div className={`modal  ${isOpen && "modal_opened"}`}>
       <div className={`modal__content modal__${name}`}>
         <h2 className="modal__title">{title}</h2>
         <button

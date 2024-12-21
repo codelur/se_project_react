@@ -29,6 +29,7 @@
   line-height: 24px;
   border: 0;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .header__user {

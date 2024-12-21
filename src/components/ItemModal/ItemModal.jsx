@@ -7,15 +7,11 @@ function ItemModal({
   card,
   isOpen,
   onDeleteItem,
-  handleClickOutside,
   openConfirmationModal,
   activeModal,
 }) {
   return (
-    <div
-      className={`modal ${isOpen && "modal_opened"}`}
-      onClick={handleClickOutside}
-    >
+    <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
         <button
           type="button"
@@ -51,7 +47,6 @@ function ItemModal({
         confirmationInfo="Are you sure you want to delete this item?This action is irreversible."
         buttonText="Yes, delete item"
         onConfirmation={onDeleteItem}
-        handleClickOutside={handleClickOutside}
         closeModal={closeModal}
       />
     </div>

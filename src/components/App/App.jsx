@@ -88,13 +88,6 @@ function App() {
     getClothingItems();
   }, []);
 
-  const handleClickOutside = (event) => {
-    if (event.target === document.querySelector(".modal_opened")) {
-      setFormAddItemErrors({});
-      closeModal();
-    }
-  };
-
   const validateForm = async (event, item) => {
     event.preventDefault();
 
@@ -176,7 +169,6 @@ function App() {
             card={selectedCard}
             isOpen={activeModal === "see-preview"}
             onDeleteItem={onDeleteItem}
-            handleClickOutside={handleClickOutside}
             openConfirmationModal={openConfirmationModal}
             activeModal={activeModal}
           ></ItemModal>
@@ -185,7 +177,6 @@ function App() {
             isOpen={activeModal === "add-garment"}
             onAddItem={validateForm}
             formAddItemErrors={formAddItemErrors}
-            handleClickOutside={handleClickOutside}
           />
           <Footer />
         </CurrentTemperatureUnitContext.Provider>

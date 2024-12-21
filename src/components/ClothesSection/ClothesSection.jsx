@@ -22,7 +22,7 @@ function ClothesSection({
         {clothingItems.map((item) => {
           return (
             <ItemCard
-              key={item._id}
+              key={item._id ? item._id : 0}
               item={item}
               onCardClick={handleCardClick}
             />

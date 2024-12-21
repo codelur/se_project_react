@@ -1,13 +1,7 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({
-  closeModal,
-  onAddItem,
-  isOpen,
-  formAddItemErrors,
-  handleClickOutside,
-}) {
+function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
   const [name, setName] = useState("");
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -43,7 +37,6 @@ function AddItemModal({
       name="add-garment"
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      handleClickOutside={handleClickOutside}
     >
       <label htmlFor="name" className="modal__label">
         Name

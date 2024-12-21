@@ -6,7 +6,6 @@ function ConfirmationModal({
   confirmationInfo,
   buttonText,
   onConfirmation,
-  handleClickOutside,
   closeModal,
 }) {
   const deleteItem = () => {
@@ -14,10 +13,7 @@ function ConfirmationModal({
   };
 
   return (
-    <div
-      className={`modal  ${isOpen && "modal_opened"}`}
-      onClick={handleClickOutside}
-    >
+    <div className={`modal  ${isOpen && "modal_opened"}`}>
       <div className="modal__confirmation-content">
         <h2 className="modal__message">{confirmationInfo}</h2>
         <button
