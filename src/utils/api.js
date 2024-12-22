@@ -14,9 +14,7 @@ function checkResponse(res) {
 }
 
 function getItems() {
-  return fetch(`${baseUrl}/items` /*,headers if necessary*/).then(
-    checkResponse
-  );
+  return fetch(`${baseUrl}/items` /*,headers if necessary*/).then();
 }
 
 async function addItem(data) {
