@@ -1,7 +1,5 @@
 const baseUrl = "http://localhost:3001";
 
-//get the next available id by selecting the MAX id +1
-//instead of doing a server call to see the least available id
 function getFirstAvailableId() {
   return Math.random();
 }
