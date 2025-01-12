@@ -28,6 +28,7 @@
 
 @media screen and (max-width: 375px) {
   .page__content {
+    display: flex;
     padding: 0 12px;
   }
 }
