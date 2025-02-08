@@ -25,7 +25,7 @@ function Header({
     day: "numeric",
   });
 
-  const { isLoggedIn } = useContext(CurrentUserContext);
+  const { isLoggedIn, currentUser } = useContext(CurrentUserContext);
 
   return (
     <header className="header">
@@ -80,11 +80,11 @@ function Header({
 
           <Link to="/profile" className="header__link" onClick={toggleMobileMenu}>
             <div className="header__user">
-              <p className="header__username">Terrence Tegegne</p>
+              <p className="header__username">{currentUser.username}</p>
               <ImageLoader
                 src={avatarSrc}
-                alternativeSrc={altAvatarSrc}
-                alt={"Terrence Tegegne"}
+                userInitial={currentUser.username.charAt(0).toUpperCase()}
+                alt={`${currentUser.username}`}
                 imageClass={"header__avatar"}
               />
             </div>

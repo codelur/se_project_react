@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function ImageLoader({ src, alternativeSrc, alt, imageClass }) {
+function ImageLoader({ src, alternativeSrc, alt, imageClass, userInitial }) {
   const [isLoading, setIsLoading] = useState(true);
   const [imageUrl, setImageUrl] = useState(src);
 
@@ -13,7 +13,7 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass }) {
     };
     image.onerror = () => {
       setIsLoading(false);
-      setImageUrl(alternativeSrc);
+      if (alternativeSrc!=undefined) setImageUrl(alternativeSrc);
     };
   });
 
@@ -22,7 +22,9 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass }) {
       {isLoading ? (
         <div></div>
       ) : (
-        <img src={imageUrl} alt={alt} className={imageClass} />
+        alternativeSrc!=undefined?
+        (<img src={imageUrl} alt={alt} className={imageClass} />)
+        : (<div className={imageClass}>{userInitial}</div>)
       )}
     </>
   );

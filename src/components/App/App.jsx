@@ -22,7 +22,7 @@ import {
   deleteItem,
   getFirstAvailableId,
 } from "../../utils/api";
-import { register, signin } from "../../utils/auth";
+import { register, signin, checkJWT } from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
 
 import "./App.css";
@@ -51,6 +51,21 @@ function App() {
   const [formSignUpErrors, setFormSignUpErrors] = useState({});
   const [formLoginErrors, setFormLoginErrors] = useState({});
 
+
+  useEffect(() =>{
+    const jwt = getToken();
+    
+    if (!jwt) {
+      return;
+    }
+    checkJWT ({token: jwt})
+    .then((res)=>{
+      setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
+      setIsLoggedIn(true);
+    })
+    .catch(console.error);
+
+  },[])
   const handleAddGarmentClick = () => {
     setActiveModal("add-garment");
     setIsMobileMenuOpened(false);
@@ -129,7 +144,7 @@ function App() {
       await signin(item)
       .then((res)=>{
         setActiveModal("");
-        setCurrentUser({ username: res.name, email: item.email, avatar: res.avatar, _id: res._id });
+        setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
         setToken(res.token);
         setIsLoggedIn(true);
         return true;

@@ -82,6 +82,19 @@
   color: black;
 }
 
+.header__avatar{
+  width: 40px;
+  height: 40px;
+  background-color: gray;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
 @media screen and (max-width: 375px) {
   .header {
     padding: 18px 0 0;

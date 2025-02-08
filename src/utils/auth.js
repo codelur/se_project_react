@@ -30,3 +30,19 @@ export const signin = ({email, password}) => {
     })
         
 }
+
+
+export const checkJWT = ({token}) => {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+        }
+    })
+    .then((res)=>{
+        return res.ok? res.json() : Promise.reject(`Error: ${res.status}`);
+    })
+        
+}
