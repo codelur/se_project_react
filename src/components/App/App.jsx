@@ -13,7 +13,9 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { getWeather, filterWeatherData } from "../../utils/weatherAPi";
 
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { coordinates, APIkey } from "../../utils/constants";
+
 import {
   getItems,
   addItem,
@@ -37,7 +39,7 @@ function App() {
     conditionCode: 0,
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({ username: "", email: "", avatar: "" });
+  const [currentUser, setCurrentUser] = useState({ username: "", email: "", avatar: "", _id: "" });
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({ link: "" });
@@ -127,7 +129,7 @@ function App() {
       await signin(item)
       .then((res)=>{
         setActiveModal("");
-        setUserData({ username: res.name, email: item.email, avatar: res.avatar });
+        setCurrentUser({ username: res.name, email: item.email, avatar: res.avatar, _id: res._id });
         setToken(res.token);
         setIsLoggedIn(true);
         return true;
@@ -208,6 +210,7 @@ function App() {
   };
 
   return (
+    <CurrentUserContext.Provider value={{currentUser, isLoggedIn, setIsLoggedIn}}>
     <div className="page">
       <div className="page__content">
         <CurrentTemperatureUnitContext.Provider
@@ -278,6 +281,7 @@ function App() {
         </CurrentTemperatureUnitContext.Provider>
       </div>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 

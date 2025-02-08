@@ -32,7 +32,9 @@
   background-color: transparent;
 }
 
-
+.header__non-user-options, .header__user-options{
+  display: flex ;
+}
 
 .header__user {
   display: flex;
