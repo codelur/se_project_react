@@ -116,3 +116,8 @@ export const altAvatarSrc = new URL(
   "./../assets/alternativeAvatar.svg",
   import.meta.url
 );
+
+export const defaultLiked = new URL("./../assets/defaultLiked.svg", import.meta.url);
+export const liked = new URL("./../assets/liked.svg", import.meta.url);
+
+

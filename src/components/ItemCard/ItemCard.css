@@ -9,8 +9,17 @@
   overflow: hidden;
 }
 
-.card__name {
+.card__feature{
+
+  display: flex;
+  flex-direction: row;
   position: absolute;
+  align-items: center;
+  padding-top: 15px;
+  gap: 10px;
+}
+
+.card__name {
   background-color: white;
   font-family: cabinetgrotesk, sans-serif;
   color: #00000099;
@@ -18,13 +27,20 @@
   font-size: 16px;
   line-height: 20px;
   padding: 2px 12px;
-  top: 15px;
   border-radius: 4px;
-  margin-top: 0;
+  margin: 0;
 }
 
 .card__item-image {
   width: 100%;
+  cursor: pointer;
+}
+
+.card__btn-like{
+  width: 18px;
+  height: 15px;
+  border: 0;
+  padding: 0;
   cursor: pointer;
 }
 
