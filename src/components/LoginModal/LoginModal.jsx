@@ -17,6 +17,10 @@ function LoginModal({closeModal, onLogin, isOpen, formLoginErrors}){
     
     const handleSubmit = (event) => {
         event.preventDefault();
+        if(onLogin(event,{email, password})){
+            setEmail("");
+            setPassword("");
+        }
     };
     return (
         <ModalWithForm

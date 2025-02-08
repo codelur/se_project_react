@@ -8,6 +8,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import Footer from "../Footer/Footer";
 import Profile from "../Profile/Profile";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherAPi";
 
@@ -19,8 +20,12 @@ import {
   deleteItem,
   getFirstAvailableId,
 } from "../../utils/api";
+import { register, signin } from "../../utils/auth";
+import { setToken, getToken, removeToken } from "../../utils/token";
 
 import "./App.css";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -31,15 +36,31 @@ function App() {
     isDay: false,
     conditionCode: 0,
   });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({ username: "", email: "", avatar: "" });
+
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({ link: "" });
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+
   const [formAddItemErrors, setFormAddItemErrors] = useState({});
+  const [formSignUpErrors, setFormSignUpErrors] = useState({});
+  const [formLoginErrors, setFormLoginErrors] = useState({});
 
   const handleAddGarmentClick = () => {
     setActiveModal("add-garment");
+    setIsMobileMenuOpened(false);
+  };
+
+  const handleSignupClick = () => {
+    setActiveModal("signup");
+    setIsMobileMenuOpened(false);
+  };
+
+  const handleLoginClick = () => {
+    setActiveModal("login");
     setIsMobileMenuOpened(false);
   };
 
@@ -87,6 +108,63 @@ function App() {
       .catch(console.error);
     getClothingItems();
   }, []);
+
+  const loginSubmit = async (event, item) =>{
+    event.preventDefault();
+
+    let hasErrors = false;
+    const errors = {};
+
+    for (const field in item) {
+      if (!item[field]) {
+        errors[field] = `${field} is required`;
+        hasErrors = true;
+      }
+    }
+
+    setFormLoginErrors(errors);
+    if (!hasErrors) {
+      await signin(item)
+      .then((res)=>{
+        setActiveModal("");
+        setUserData({ username: res.name, email: item.email, avatar: res.avatar });
+        setToken(res.token);
+        setIsLoggedIn(true);
+        return true;
+      })
+      .catch(console.error);
+
+    }
+
+    return false;
+  }
+
+  const signUpSubmit = async (event, item) =>{
+    event.preventDefault();
+
+    let hasErrors = false;
+    const errors = {};
+
+    for (const field in item) {
+      if (!item[field]) {
+        errors[field] = `${field} is required`;
+        hasErrors = true;
+      }
+    }
+
+    setFormSignUpErrors(errors);
+    if (!hasErrors) {
+      await register(item)
+      .then(()=>{
+        setActiveModal("");
+        return true;
+      })
+      .catch(console.error);
+
+    }
+
+    return false;
+  }
 
   const validateForm = async (event, item) => {
     event.preventDefault();
@@ -137,6 +215,8 @@ function App() {
         >
           <Header
             handleAddGarmentClick={handleAddGarmentClick}
+            handleSignupClick={handleSignupClick}
+            handleLoginClick={handleLoginClick}
             weatherData={weatherData}
             toggleMobileMenu={toggleMobileMenu}
             mobileMenuHandler={mobileMenuHandler}
@@ -153,16 +233,20 @@ function App() {
                 />
               }
             ></Route>
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  handleCardClick={handleCardClick}
-                  handleAddGarmentClick={handleAddGarmentClick}
-                  clothingItems={clothingItems}
-                />
-              }
-            />
+            
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute  anonymous>
+                  <Profile
+                    handleCardClick={handleCardClick}
+                    handleAddGarmentClick={handleAddGarmentClick}
+                    clothingItems={clothingItems}
+                  />
+                  </ProtectedRoute>
+                }
+              />
+            
           </Routes>
           <ItemModal
             closeModal={closeModal}
@@ -177,6 +261,18 @@ function App() {
             isOpen={activeModal === "add-garment"}
             onAddItem={validateForm}
             formAddItemErrors={formAddItemErrors}
+          />
+          <RegisterModal 
+            closeModal={closeModal}
+            onSignUp={signUpSubmit}
+            isOpen={activeModal === "signup"}
+            formSignUpErrors={formSignUpErrors}
+          />
+          <LoginModal 
+            closeModal={closeModal}
+            onLogin={loginSubmit}
+            isOpen={activeModal === "login"}
+            formLoginErrors={formLoginErrors}
           />
           <Footer />
         </CurrentTemperatureUnitContext.Provider>

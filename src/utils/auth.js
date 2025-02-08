@@ -1,7 +1,7 @@
 //Specify the BASE_URL for the API.
 const BASE_URL = "http://localhost:3001";
 
-export const register = (email, password, name, avatar) => {
+export const register = ({email, password, name, avatar}) => {
     return fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
@@ -16,7 +16,7 @@ export const register = (email, password, name, avatar) => {
         
 }
 
-export const signin = (email, password) => {
+export const signin = ({email, password}) => {
     return fetch(`${BASE_URL}/signin`, {
         method: "POST",
         headers: {

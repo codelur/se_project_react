@@ -21,7 +21,7 @@
   line-height: 24px;
 }
 
-.header__add-clothes-btn {
+.header__add-clothes-btn, .header__signup-btn, .header_login-modal-btn {
   margin: 0 20px 0 auto;
   font-family: cabinetgrotesk, sans-serif;
   font-weight: 700;
@@ -31,6 +31,8 @@
   cursor: pointer;
   background-color: transparent;
 }
+
+
 
 .header__user {
   display: flex;

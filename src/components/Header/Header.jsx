@@ -6,6 +6,8 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 function Header({
   handleAddGarmentClick,
+  handleLoginClick,
+  handleSignupClick,
   weatherData,
   toggleMobileMenu,
   mobileMenuHandler,
@@ -42,11 +44,28 @@ function Header({
         <ToggleSwitch />
         <button
           type="button"
+          className="header__signup-btn"
+          onClick={handleSignupClick}
+        >
+          Sign Up
+        </button>
+
+        <button
+          type="button"
+          className="header_login-modal-btn"
+          onClick={handleLoginClick}
+        >
+          Log In
+        </button>
+
+        <button
+          type="button"
           className="header__add-clothes-btn"
           onClick={handleAddGarmentClick}
         >
           + Add clothes
         </button>
+
         <Link to="/profile" className="header__link" onClick={toggleMobileMenu}>
           <div className="header__user">
             <p className="header__username">Terrence Tegegne</p>

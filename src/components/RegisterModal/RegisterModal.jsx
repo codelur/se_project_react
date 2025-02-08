@@ -21,14 +21,20 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
         formSignUpErrors.name = "";
     };
 
-    const [avatarUrl, setAvatarUrl] = useState("");
-    const handleAvatarUrlChange = (event) => {
-        setAvatarUrl(event.target.value);
+    const [avatar, setAvatar] = useState("");
+    const handleAvatarChange = (event) => {
+        setAvatar(event.target.value);
         formSignUpErrors.name = "";
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if(onSignUp(event,{email, password, name, avatar})){
+            setEmail("");
+            setPassword("");
+            setName("");
+            setAvatar("");
+        }
     }
 
     return (
@@ -45,7 +51,6 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
         <input
           type="email"
           className="modal__input"
-          id="email"
           name="email"
           placeholder="Email"
           onChange={handleEmailChange}
@@ -60,7 +65,6 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
         <input
           type="password"
           className="modal__input"
-          id="password"
           name="password"
           placeholder="Password"
           onChange={handlePasswordChange}
@@ -75,7 +79,6 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
         <input
           type="text"
           className="modal__input"
-          id="name"
           name="name"
           placeholder="Name"
           onChange={handleNameChange}
@@ -85,16 +88,16 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
           <p className="modal__error">This field is required</p>
         )}
       </label>
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar URL *
         <input
           type="text"
           className="modal__input"
-          id="avatartUrl"
-          name="avatartUrl"
+          id="avatar"
+          name="avatar"
           placeholder="Avatar Url"
-          onChange={handleAvatarUrlChange}
-          value={avatarUrl}
+          onChange={handleAvatarChange}
+          value={avatar}
         />
         {formSignUpErrors.name && (
           <p className="modal__error">This field is required</p>
