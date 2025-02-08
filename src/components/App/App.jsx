@@ -72,7 +72,7 @@ function App() {
 
   const getClothingItems = () => {
     getItems()
-      .then((data) => {
+      .then(({data}) => {
         setClothingItems(data);
       })
       .catch(console.error);
