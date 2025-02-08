@@ -82,8 +82,8 @@ function Header({
             <div className="header__user">
               <p className="header__username">{currentUser.username}</p>
               <ImageLoader
-                src={avatarSrc}
-                userInitial={currentUser.username.charAt(0).toUpperCase()}
+                src={currentUser.avatar}
+                userInitial={currentUser.username?currentUser.username.charAt(0).toUpperCase():""}
                 alt={`${currentUser.username}`}
                 imageClass={"header__avatar"}
               />

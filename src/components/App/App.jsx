@@ -21,6 +21,9 @@ import {
   addItem,
   deleteItem,
   getFirstAvailableId,
+  editProfile,
+  addCardLike, 
+  removeCardLike
 } from "../../utils/api";
 import { register, signin, checkJWT } from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
@@ -28,6 +31,7 @@ import { setToken, getToken, removeToken } from "../../utils/token";
 import "./App.css";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -50,6 +54,8 @@ function App() {
   const [formAddItemErrors, setFormAddItemErrors] = useState({});
   const [formSignUpErrors, setFormSignUpErrors] = useState({});
   const [formLoginErrors, setFormLoginErrors] = useState({});
+  const [formEditProfileErrors, setFormEditProfileErrors] = useState({});
+  
 
 
   useEffect(() =>{
@@ -59,8 +65,8 @@ function App() {
       return;
     }
     checkJWT ({token: jwt})
-    .then((res)=>{
-      setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
+    .then(({data})=>{
+      setCurrentUser({ username: data.name, email: data.email, avatar: data.avatar, _id: data._id });
       setIsLoggedIn(true);
     })
     .catch(console.error);
@@ -81,6 +87,11 @@ function App() {
     setIsMobileMenuOpened(false);
   };
 
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
+    setIsMobileMenuOpened(false);
+  };
+
   const handleCardClick = (card) => {
     setActiveModal("see-preview");
     setSelectedCard(card);
@@ -92,6 +103,9 @@ function App() {
 
   const closeModal = () => {
     setFormAddItemErrors({});
+    setFormSignUpErrors({});
+    setFormLoginErrors({});
+    setFormEditProfileErrors({});
     setActiveModal("");
   };
 
@@ -125,6 +139,32 @@ function App() {
       .catch(console.error);
     getClothingItems();
   }, []);
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        api
+          // the first argument is the card's id
+          .addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        api
+          // the first argument is the card's id
+          .removeCardLike(id, token) 
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
 
   const loginSubmit = async (event, item) =>{
     event.preventDefault();
@@ -183,6 +223,34 @@ function App() {
     return false;
   }
 
+  const EditProfileSubmit = async (event, item) => {
+    event.preventDefault();
+
+    let hasErrors = false;
+    const errors = {};
+
+    for (const field in item) {
+      if (!item[field]) {
+        errors[field] = `${field} is required`;
+        hasErrors = true;
+      }
+    }
+
+    setFormEditProfileErrors(errors);
+    if (!hasErrors) {
+
+      await editProfile(item, getToken())
+        .then((res) => {
+          setActiveModal("");
+          setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
+
+          return true;
+        })
+        .catch(console.error);
+    }
+    return false;
+  }
+
   const validateForm = async (event, item) => {
     event.preventDefault();
 
@@ -201,9 +269,11 @@ function App() {
       const id = getFirstAvailableId(clothingItems);
       item._id = id;
 
-      await addItem(item, clothingItems)
-        .then(() => {
+      await addItem(item, getToken())
+        .then(({data}) => {
           setActiveModal("");
+          item._id = data._id;
+          item.owner = data.owner;
           setClothingItems([item, ...clothingItems]);
           return true;
         })
@@ -213,7 +283,7 @@ function App() {
   };
 
   const onDeleteItem = (id) => {
-    deleteItem(id)
+    deleteItem(id, getToken())
       .then(() => {
         setActiveModal("");
         const newclothingItems = clothingItems.filter(
@@ -255,11 +325,12 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute  anonymous>
+                  <ProtectedRoute  anonymous={!isLoggedIn}>
                   <Profile
                     handleCardClick={handleCardClick}
                     handleAddGarmentClick={handleAddGarmentClick}
                     clothingItems={clothingItems}
+                    handleEditProfileClick={handleEditProfileClick}
                   />
                   </ProtectedRoute>
                 }
@@ -291,6 +362,12 @@ function App() {
             onLogin={loginSubmit}
             isOpen={activeModal === "login"}
             formLoginErrors={formLoginErrors}
+          />
+          <EditProfileModal 
+          closeModal={closeModal}
+          onEdit={EditProfileSubmit}
+          isOpen={activeModal === "edit-profile"}
+          formEditProfileErrors={formEditProfileErrors}
           />
           <Footer />
         </CurrentTemperatureUnitContext.Provider>

@@ -1,6 +1,8 @@
 import "./ItemModal.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useContext } from "react"; 
 
 function ItemModal({
   closeModal,
@@ -10,6 +12,10 @@ function ItemModal({
   openConfirmationModal,
   activeModal,
 }) {
+
+  const { currentUser } = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser._id;
+
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
@@ -30,15 +36,17 @@ function ItemModal({
             <h2 className="modal__caption">{card.name}</h2>
             <p className="modal__weather">Weather: {card.weather}</p>
           </div>
-          <div className="modal__delete">
-            <button
-              type="button"
-              className="modal__delete-clothes-btn"
-              onClick={openConfirmationModal}
-            >
-              Delete item
-            </button>
-          </div>
+          {isOwn && (
+            <div className="modal__delete">
+              <button
+                type="button"
+                className="modal__delete-clothes-btn"
+                onClick={openConfirmationModal}
+              >
+                Delete item
+              </button>
+            </div>)
+          }
         </div>
       </div>
       <ConfirmationModal

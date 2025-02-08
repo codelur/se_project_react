@@ -56,7 +56,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
           onChange={handleEmailChange}
           value={email}
         />
-        {formSignUpErrors.name && (
+        {formSignUpErrors.email && (
           <p className="modal__error">This field is required</p>
         )}
     </label>
@@ -70,7 +70,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
           onChange={handlePasswordChange}
           value={password}
         />
-        {formSignUpErrors.name && (
+        {formSignUpErrors.password && (
           <p className="modal__error">This field is required</p>
         )}
     </label>
@@ -99,7 +99,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
           onChange={handleAvatarChange}
           value={avatar}
         />
-        {formSignUpErrors.name && (
+        {formSignUpErrors.avatar && (
           <p className="modal__error">This field is required</p>
         )}
       </label>

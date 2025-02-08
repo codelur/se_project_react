@@ -42,7 +42,7 @@ function LoginModal({closeModal, onLogin, isOpen, formLoginErrors}){
           onChange={handleEmailChange}
           value={email}
         />
-        {formLoginErrors.name && (
+        {formLoginErrors.email && (
           <p className="modal__error">This field is required</p>
         )}
       </label>
@@ -57,7 +57,7 @@ function LoginModal({closeModal, onLogin, isOpen, formLoginErrors}){
           onChange={handlePasswordChange}
           value={password}
         />
-        {formLoginErrors.name && (
+        {formLoginErrors.password && (
           <p className="modal__error">This field is required</p>
         )}
       </label>
