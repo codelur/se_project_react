@@ -29,9 +29,9 @@ function ItemCard({ item, onCardClick, handleCardLike }) {
     <li className="card" onClick={handleCardClick}>
       <div className="card__feature">
       <h2 className="card__name">{item.name}</h2>
-      <button className="card__btn-like" onClick={handleLike}>
+      {currentUser._id!= item.owner && currentUser._id!= "" &&<button className="card__btn-like" onClick={handleLike}>
           <img src={itemLikeButtonSrc} className="cards__btn-image" alt="liked" />
-      </button>
+      </button>}
       </div>
       <ImageLoader
         src={item.imageUrl}

@@ -122,6 +122,12 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
+  const handleLogOut = () =>{
+    setIsLoggedIn(false);
+    setCurrentUser({ username: "", email: "", avatar: "", _id: "" });
+    removeToken();
+  }
+
   const getClothingItems = () => {
     getItems()
       .then(({data}) => {
@@ -274,6 +280,7 @@ function App() {
           setActiveModal("");
           item._id = data._id;
           item.owner = data.owner;
+          item.likes = [];
           setClothingItems([item, ...clothingItems]);
           return true;
         })
@@ -332,6 +339,7 @@ function App() {
                     handleAddGarmentClick={handleAddGarmentClick}
                     clothingItems={clothingItems}
                     handleEditProfileClick={handleEditProfileClick}
+                    handleLogOut={handleLogOut}
                   />
                   </ProtectedRoute>
                 }

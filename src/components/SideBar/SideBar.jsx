@@ -5,7 +5,7 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import "./SideBar.css";
 
-function SideBar({handleEditProfileClick}) {
+function SideBar({handleEditProfileClick, handleLogOut}) {
   const {  currentUser } = useContext(CurrentUserContext);
   return (
     <div className="sidebar">
@@ -24,7 +24,8 @@ function SideBar({handleEditProfileClick}) {
         onClick={handleEditProfileClick}>
           Change profile data
         </button>
-        <button type="button" className="sidebar__logout">
+        <button type="button" className="sidebar__logout"
+        onClick={handleLogOut} >
           Log out
         </button>
       </div>
