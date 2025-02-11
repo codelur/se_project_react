@@ -1,5 +1,4 @@
 import { useContext } from "react"; 
-import { avatarSrc, altAvatarSrc } from "../../utils/constants";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 

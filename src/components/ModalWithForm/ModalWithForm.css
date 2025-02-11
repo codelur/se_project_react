@@ -110,6 +110,11 @@
   color: black;
 }
 
+.modal__buttons{
+  display: flex;
+  gap: 12px;
+}
+
 .modal__submit {
   font-family: cabinetgrotesk, sans-serif;
   background-color: #000000;
@@ -120,6 +125,20 @@
   width: 132px;
   height: 36px;
   cursor: pointer;
+}
+
+.modal__alt{
+  font-family: cabinetgrotesk, sans-serif;
+  color: gray;
+  border: 0;
+  background-color: white;
+  font-size: 16px;
+  line-height: 20px;
+
+}
+
+.modal__alt:hover{
+  color: black;
 }
 
 .modal__submit:hover {

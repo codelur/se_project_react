@@ -92,6 +92,10 @@ function App() {
     setIsMobileMenuOpened(false);
   };
 
+  const switchModal = (name) => {
+    setActiveModal(name);
+  }
+
   const handleCardClick = (card) => {
     setActiveModal("see-preview");
     setSelectedCard(card);
@@ -172,7 +176,7 @@ function App() {
           .catch((err) => console.log(err));
   };
 
-  const loginSubmit = async (event, item) =>{
+  const loginSubmit =  async (event, item) =>{
     event.preventDefault();
 
     let hasErrors = false;
@@ -185,17 +189,28 @@ function App() {
       }
     }
 
-    setFormLoginErrors(errors);
+    if (hasErrors)
+      setFormLoginErrors(errors);
     if (!hasErrors) {
-      await signin(item)
-      .then((res)=>{
+      try{
+        
+        const res = await signin(item);
+        if (res.status && res.status === 401) {
+          setFormLoginErrors({ ...errors, login: "Invalid credentials" });
+          return false;
+        }
+        
         setActiveModal("");
         setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
         setToken(res.token);
         setIsLoggedIn(true);
+        setFormLoginErrors({});
         return true;
-      })
-      .catch(console.error);
+
+      }catch(error){
+        console.log(error);
+        return false;
+      };
 
     }
 
@@ -217,12 +232,14 @@ function App() {
 
     setFormSignUpErrors(errors);
     if (!hasErrors) {
-      await register(item)
-      .then(()=>{
+      const res = await register(item);
+      if(!res.message){
         setActiveModal("");
         return true;
-      })
-      .catch(console.error);
+      }
+      else{
+        setFormSignUpErrors({ ...errors, errors: res.message });
+      return false;};
 
     }
 
@@ -365,18 +382,21 @@ function App() {
             onSignUp={signUpSubmit}
             isOpen={activeModal === "signup"}
             formSignUpErrors={formSignUpErrors}
+            switchModal={switchModal}
           />
           <LoginModal 
             closeModal={closeModal}
             onLogin={loginSubmit}
             isOpen={activeModal === "login"}
             formLoginErrors={formLoginErrors}
+            switchModal={switchModal}
           />
           <EditProfileModal 
           closeModal={closeModal}
           onEdit={EditProfileSubmit}
           isOpen={activeModal === "edit-profile"}
           formEditProfileErrors={formEditProfileErrors}
+          
           />
           <Footer />
         </CurrentTemperatureUnitContext.Provider>

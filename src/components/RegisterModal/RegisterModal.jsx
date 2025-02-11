@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
+function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switchModal }) {
 
     const [email, setEmail] = useState("");
     const handleEmailChange = (event) => {
@@ -27,9 +27,9 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
         formSignUpErrors.name = "";
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        if(onSignUp(event,{email, password, name, avatar})){
+        if(await onSignUp(event,{email, password, name, avatar})){
             setEmail("");
             setPassword("");
             setName("");
@@ -45,7 +45,13 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors }) {
       name="signup"
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      altButtonText={"or Log In"}
+      switchModal={switchModal}
+      modal={"login"}
     >
+        {formSignUpErrors.errors && (
+          <p className="modal__error">{formSignUpErrors.errors}</p>
+        )}
     <label htmlFor="email" className="modal__label">
         Email *
         <input

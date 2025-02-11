@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 
 function EditProfileModal({closeModal, onEdit, isOpen, formEditProfileErrors}){
+    const {  currentUser } = useContext(CurrentUserContext);
 
-    const [name, setName] = useState("");
+    useEffect(() => {
+        setName(currentUser.username);
+      }, [currentUser.username])
+
+    const [name, setName] = useState(currentUser.username);
     const handleNameChange = (event) => {
         setName(event.target.value);
         formEditProfileErrors.name = "";
     };
 
-    const [avatar, setAvatar] = useState("");
+    const [avatar, setAvatar] = useState(currentUser.avatar);
     const handleAvatarChange = (event) => {
         setAvatar(event.target.value);
         formEditProfileErrors.name = "";

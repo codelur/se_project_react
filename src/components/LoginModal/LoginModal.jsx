@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({closeModal, onLogin, isOpen, formLoginErrors}){
+function LoginModal({closeModal, onLogin, isOpen, formLoginErrors, switchModal}){
 
+    useEffect(() => {
+        console.log("formLoginErrors changed:", formLoginErrors);
+      }, [formLoginErrors]);
     const [email, setEmail] = useState("");
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -15,9 +18,9 @@ function LoginModal({closeModal, onLogin, isOpen, formLoginErrors}){
         formLoginErrors.name = "";
     };
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if(onLogin(event,{email, password})){
+        if(await onLogin(event,{email, password})){
             setEmail("");
             setPassword("");
         }
@@ -30,7 +33,13 @@ function LoginModal({closeModal, onLogin, isOpen, formLoginErrors}){
       name="login"
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      altButtonText={"or Sign Up"}
+      switchModal={switchModal}
+      modal={"signup"}
     >
+        {formLoginErrors.login && (
+          <p className="modal__error">Incorrect email/password</p>
+        )}
     <label htmlFor="email" className="modal__label">
         Email
         <input
