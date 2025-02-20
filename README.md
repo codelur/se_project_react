@@ -45,7 +45,7 @@ Clone the repository: Use git clone https://github.com/codelur/se_project_react.
 Install dependencies: Navigate to the cloned directory and run npm install or yarn install to install the required project dependencies.
 
 Set up OpenWeatherMap API: Obtain an API key from https://api.openweathermap.org and create a .env file (if not already present) in your project root directory to store the API key securely. Add the following line to your .env file, replacing <YOUR_API_KEY> with your actual key:
-REACT_APP_OPENWEATHERMAP_API_KEY=<YOUR_API_KEY>
+REACT_APP_OPENWEATHERMAP_API_KEY=<YOUR_API_KEY>(as explained in Weather API section)
 
 Start the development server: Run npm start or yarn start to initiate the development server. Your application should be accessible at http://localhost:3000 (or the port specified in your package.json).
 Development:
@@ -53,6 +53,7 @@ Development:
 Codebase structure is organized for maintainability and collaboration.
 Hot reloading allows for immediate visual feedback during development.
 Feel free to customize the styling, weather API integration, and clothing recommendation logic to fit your preferences.
+
 Technologies:
 
 ## Links
