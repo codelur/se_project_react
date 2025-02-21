@@ -6,6 +6,7 @@ function ClothesSection({
   handleCardClick,
   handleAddGarmentClick,
   clothingItems,
+  handleCardLike,
 }) {
   return (
     <div className="clothes-section">
@@ -26,6 +27,7 @@ function ClothesSection({
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick}
+                handleCardLike={handleCardLike}
               />
             );
           })}
