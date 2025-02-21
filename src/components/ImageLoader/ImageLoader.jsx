@@ -22,7 +22,7 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass, userInitial }) {
       {isLoading ? (
         <div></div>
       ) : (
-        alternativeSrc!=undefined?
+        imageUrl!=undefined?
         (<img src={imageUrl} alt={alt} className={imageClass} />)
         : (<div className={imageClass}>{userInitial}</div>)
       )}

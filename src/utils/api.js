@@ -4,11 +4,12 @@ function getFirstAvailableId() {
   return Math.random();
 }
 
-function checkResponse(res) {
+async function  checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Error ${res.status}`);
+  const error = await res.json();
+  return Promise.reject(`Error ${res.status} ${error.message}`);
 }
 
 function getItems() {
@@ -30,6 +31,7 @@ async function addItem(data, token) {
     return await checkResponse(response);
   } catch (error) {
     console.error("Error:", error);
+    throw new Error(error);
   }
 }
 

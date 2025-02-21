@@ -20,9 +20,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
     formAddItemErrors.weather = "";
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (onAddItem(event, { name, imageUrl, weather })) {
+    if (await onAddItem(event, { name, imageUrl, weather })) {
       setName("");
       setImageUrl("");
       SetWeather("");
@@ -38,6 +38,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
+      {formAddItemErrors.error && (
+          <p className="modal__error">{formAddItemErrors.error}</p>
+        )}
       <label htmlFor="name" className="modal__label">
         Name
         <input

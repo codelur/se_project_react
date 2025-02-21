@@ -292,16 +292,21 @@ function App() {
       const id = getFirstAvailableId(clothingItems);
       item._id = id;
 
-      await addItem(item, getToken())
-        .then(({data}) => {
-          setActiveModal("");
-          item._id = data._id;
-          item.owner = data.owner;
-          item.likes = [];
-          setClothingItems([item, ...clothingItems]);
-          return true;
-        })
-        .catch(console.error);
+      try{
+        const { data } = await addItem(item, getToken());
+        setActiveModal("");
+        item._id = data._id;
+        item.owner = data.owner;
+        item.likes = [];
+        setClothingItems([item, ...clothingItems]);
+        return true;
+      }catch (error) {
+        console.error("Fetch error:", error.message);
+        setFormAddItemErrors(prevErrors => ({
+          ...prevErrors,
+          error: error.message.split("failed: ")[1]
+        }));
+      };
     }
     return false;
   };

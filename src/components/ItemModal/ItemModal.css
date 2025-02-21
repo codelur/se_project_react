@@ -41,7 +41,9 @@
 }
 
 .modal__image {
-  object-fit: cover;
+  object-fit: fill;
+  width: 498px;
+  height: 498px;
 }
 
 .modal__delete-clothes-btn {

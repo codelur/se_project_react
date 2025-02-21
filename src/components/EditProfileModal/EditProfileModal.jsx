@@ -8,7 +8,8 @@ function EditProfileModal({closeModal, onEdit, isOpen, formEditProfileErrors}){
 
     useEffect(() => {
         setName(currentUser.username);
-      }, [currentUser.username])
+        setAvatar(currentUser.avatar);
+      }, [currentUser])
 
     const [name, setName] = useState(currentUser.username);
     const handleNameChange = (event) => {
