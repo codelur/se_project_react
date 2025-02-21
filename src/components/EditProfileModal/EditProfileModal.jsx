@@ -39,6 +39,9 @@ function EditProfileModal({closeModal, onEdit, isOpen, formEditProfileErrors}){
         isOpen={isOpen}
         onSubmit={handleSubmit}
       >
+        {formEditProfileErrors.error && (
+          <p className="modal__error">{formEditProfileErrors.error}</p>
+        )}
         <label htmlFor="name" className="modal__label">
         Name *
         <input

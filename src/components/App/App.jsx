@@ -269,7 +269,13 @@ function App() {
 
           return true;
         })
-        .catch(console.error);
+        .catch(error=>{
+          console.error(error);
+          setFormEditProfileErrors(prevErrors => ({
+            ...prevErrors,
+            error: error.split("failed: ")[1]
+          }));
+        });
     }
     return false;
   }
@@ -301,7 +307,7 @@ function App() {
         setClothingItems([item, ...clothingItems]);
         return true;
       }catch (error) {
-        console.error("Fetch error:", error.message);
+        console.error("Error:", error.message);
         setFormAddItemErrors(prevErrors => ({
           ...prevErrors,
           error: error.message.split("failed: ")[1]
