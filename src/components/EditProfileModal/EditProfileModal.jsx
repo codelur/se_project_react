@@ -11,7 +11,7 @@ function EditProfileModal({
   isLoading,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
-  const { values, handleChange, isValid, setValues } = useFormAndValidation();
+  const { values, handleChange, isValid, setValues, errors } = useFormAndValidation();
 
   useEffect(() => {
     setValues({ name: currentUser.username, avatar: currentUser.avatar });
@@ -46,22 +46,23 @@ function EditProfileModal({
           value={values.name || ""}
           required
         />
-        {formEditProfileErrors.name && (
-          <p className="modal__error">This field is required</p>
+        {errors.name && (
+          <p className="modal__error">{errors.name}</p>
         )}
       </label>
       <label className="modal__label">
         Avatar *
         <input
-          type="text"
+          type="url"
           className="modal__input"
           name="avatar"
           placeholder="Avatar Url"
           onChange={handleChange}
           value={values.avatar || ""}
+          required
         />
-        {formEditProfileErrors.avatar && (
-          <p className="modal__error">This field is required</p>
+        {errors.avatar && (
+          <p className="modal__error">{errors.avatar}</p>
         )}
       </label>
     </ModalWithForm>
