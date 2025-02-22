@@ -72,11 +72,19 @@ function App() {
       }
     };
 
-    document.addEventListener("keydown", handleEscClose);
+    const handleOverlay = (e) => {
+      // that's why you should have a `modal` class name in each modal to be able to universally handle the overlay click
+      if (e.target.classList.contains("modal")) {
+        closeModal();
+      }
+    };
 
+    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("mousedown", handleOverlay);
     return () => {
       // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("mousedown", handleOverlay);
     };
   }, [activeModal]);
 
