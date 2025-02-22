@@ -89,4 +89,4 @@ function removeCardLike (id, token){
   );
 }
 
-export { getItems, addItem, deleteItem, getFirstAvailableId, editProfile, addCardLike, removeCardLike };
+export { getItems, addItem, deleteItem, getFirstAvailableId, editProfile, addCardLike, removeCardLike, checkResponse };

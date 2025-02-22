@@ -52,7 +52,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
         {formSignUpErrors.errors && (
           <p className="modal__error">{formSignUpErrors.errors}</p>
         )}
-    <label htmlFor="email" className="modal__label">
+    <label  className="modal__label">
         Email *
         <input
           type="email"
@@ -66,7 +66,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
           <p className="modal__error">This field is required</p>
         )}
     </label>
-    <label htmlFor="password" className="modal__label">
+    <label  className="modal__label">
     Password *
         <input
           type="password"
@@ -80,7 +80,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
           <p className="modal__error">This field is required</p>
         )}
     </label>
-    <label htmlFor="name" className="modal__label">
+    <label className="modal__label">
         Name *
         <input
           type="text"
@@ -94,7 +94,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
           <p className="modal__error">This field is required</p>
         )}
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label  className="modal__label">
         Avatar URL *
         <input
           type="text"

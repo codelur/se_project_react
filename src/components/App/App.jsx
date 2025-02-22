@@ -246,7 +246,7 @@ function App() {
     return false;
   }
 
-  const EditProfileSubmit = async (event, item) => {
+  const editProfileSubmit = async (event, item) => {
     event.preventDefault();
 
     let hasErrors = false;
@@ -331,89 +331,89 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={{currentUser, isLoggedIn, setIsLoggedIn}}>
-    <div className="page">
-      <div className="page__content">
-        <CurrentTemperatureUnitContext.Provider
-          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-        >
-          <Header
-            handleAddGarmentClick={handleAddGarmentClick}
-            handleSignupClick={handleSignupClick}
-            handleLoginClick={handleLoginClick}
-            weatherData={weatherData}
-            toggleMobileMenu={toggleMobileMenu}
-            mobileMenuHandler={mobileMenuHandler}
-            isMobileMenuOpened={isMobileMenuOpened}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  weatherData={weatherData}
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleCardLike={handleCardLike}
-                />
-              }
-            ></Route>
-            
+      <div className="page">
+        <div className="page__content">
+          <CurrentTemperatureUnitContext.Provider
+            value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+          >
+            <Header
+              handleAddGarmentClick={handleAddGarmentClick}
+              handleSignupClick={handleSignupClick}
+              handleLoginClick={handleLoginClick}
+              weatherData={weatherData}
+              toggleMobileMenu={toggleMobileMenu}
+              mobileMenuHandler={mobileMenuHandler}
+              isMobileMenuOpened={isMobileMenuOpened}
+            />
+            <Routes>
               <Route
-                path="/profile"
+                path="/"
                 element={
-                  <ProtectedRoute  anonymous={!isLoggedIn}>
-                  <Profile
+                  <Main
+                    weatherData={weatherData}
                     handleCardClick={handleCardClick}
-                    handleAddGarmentClick={handleAddGarmentClick}
                     clothingItems={clothingItems}
-                    handleEditProfileClick={handleEditProfileClick}
-                    handleLogOut={handleLogOut}
                     handleCardLike={handleCardLike}
                   />
-                  </ProtectedRoute>
                 }
-              />
+              ></Route>
+              
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute  anonymous={!isLoggedIn}>
+                    <Profile
+                      handleCardClick={handleCardClick}
+                      handleAddGarmentClick={handleAddGarmentClick}
+                      clothingItems={clothingItems}
+                      handleEditProfileClick={handleEditProfileClick}
+                      handleLogOut={handleLogOut}
+                      handleCardLike={handleCardLike}
+                    />
+                    </ProtectedRoute>
+                  }
+                />
+              
+            </Routes>
+            <ItemModal
+              closeModal={closeModal}
+              card={selectedCard}
+              isOpen={activeModal === "see-preview"}
+              onDeleteItem={onDeleteItem}
+              openConfirmationModal={openConfirmationModal}
+              activeModal={activeModal}
+            ></ItemModal>
+            <AddItemModal
+              closeModal={closeModal}
+              isOpen={activeModal === "add-garment"}
+              onAddItem={validateForm}
+              formAddItemErrors={formAddItemErrors}
+            />
+            <RegisterModal 
+              closeModal={closeModal}
+              onSignUp={signUpSubmit}
+              isOpen={activeModal === "signup"}
+              formSignUpErrors={formSignUpErrors}
+              switchModal={switchModal}
+            />
+            <LoginModal 
+              closeModal={closeModal}
+              onLogin={loginSubmit}
+              isOpen={activeModal === "login"}
+              formLoginErrors={formLoginErrors}
+              switchModal={switchModal}
+            />
+            <EditProfileModal 
+            closeModal={closeModal}
+            onEdit={editProfileSubmit}
+            isOpen={activeModal === "edit-profile"}
+            formEditProfileErrors={formEditProfileErrors}
             
-          </Routes>
-          <ItemModal
-            closeModal={closeModal}
-            card={selectedCard}
-            isOpen={activeModal === "see-preview"}
-            onDeleteItem={onDeleteItem}
-            openConfirmationModal={openConfirmationModal}
-            activeModal={activeModal}
-          ></ItemModal>
-          <AddItemModal
-            closeModal={closeModal}
-            isOpen={activeModal === "add-garment"}
-            onAddItem={validateForm}
-            formAddItemErrors={formAddItemErrors}
-          />
-          <RegisterModal 
-            closeModal={closeModal}
-            onSignUp={signUpSubmit}
-            isOpen={activeModal === "signup"}
-            formSignUpErrors={formSignUpErrors}
-            switchModal={switchModal}
-          />
-          <LoginModal 
-            closeModal={closeModal}
-            onLogin={loginSubmit}
-            isOpen={activeModal === "login"}
-            formLoginErrors={formLoginErrors}
-            switchModal={switchModal}
-          />
-          <EditProfileModal 
-          closeModal={closeModal}
-          onEdit={EditProfileSubmit}
-          isOpen={activeModal === "edit-profile"}
-          formEditProfileErrors={formEditProfileErrors}
-          
-          />
-          <Footer />
-        </CurrentTemperatureUnitContext.Provider>
+            />
+            <Footer />
+          </CurrentTemperatureUnitContext.Provider>
+        </div>
       </div>
-    </div>
     </CurrentUserContext.Provider>
   );
 }

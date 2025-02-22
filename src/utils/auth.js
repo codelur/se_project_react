@@ -1,5 +1,6 @@
 //Specify the BASE_URL for the API.
 const BASE_URL = "http://localhost:3001";
+import {checkResponse}  from "./api";
 
 export const register = async ({email, password, name, avatar}) => {
     return await fetch(`${BASE_URL}/signup`, {
@@ -10,10 +11,7 @@ export const register = async ({email, password, name, avatar}) => {
         },
         body: JSON.stringify({name, avatar, email, password})
     })
-    .then((res)=>{
-        return res.ok? res.json() : res.json() ;
-    })
-        
+    .then(checkResponse)     
 }
 
 export const signin = ({email, password}) => {
@@ -25,9 +23,7 @@ export const signin = ({email, password}) => {
         },
         body: JSON.stringify({ email, password})
     })
-    .then((res)=>{
-        return res.ok? res.json() :  res ;
-    })
+    .then(checkResponse)
         
 }
 
@@ -41,8 +37,6 @@ export const checkJWT = ({token}) => {
             authorization: `Bearer ${token}`,
         }
     })
-    .then((res)=>{
-        return res.ok? res.json() : Promise.reject(`Error: ${res.status}`);
-    })
+    .then(checkResponse)
         
 }

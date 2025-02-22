@@ -14,9 +14,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
     formAddItemErrors.imageUrl = "";
   };
 
-  const [weather, SetWeather] = useState("");
+  const [weather, setWeather] = useState("");
   const handleWeatherChange = (event) => {
-    SetWeather(event.target.id);
+    setWeather(event.target.id);
     formAddItemErrors.weather = "";
   };
 
@@ -25,7 +25,7 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
     if (await onAddItem(event, { name, imageUrl, weather })) {
       setName("");
       setImageUrl("");
-      SetWeather("");
+      setWeather("");
     }
   };
 
