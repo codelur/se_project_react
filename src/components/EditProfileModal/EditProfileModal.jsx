@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
@@ -10,11 +10,11 @@ function EditProfileModal({
   formEditProfileErrors,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
-  const { values, handleChange, isValid , setValues} = useFormAndValidation();
+  const { values, handleChange, isValid, setValues } = useFormAndValidation();
 
   useEffect(() => {
-    setValues({ name: currentUser.username, avatar: currentUser.avatar })
-  },[currentUser]);
+    setValues({ name: currentUser.username, avatar: currentUser.avatar });
+  }, [currentUser, setValues]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

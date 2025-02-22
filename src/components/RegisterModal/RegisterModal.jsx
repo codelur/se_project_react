@@ -1,44 +1,49 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switchModal }) {
+function RegisterModal({
+  closeModal,
+  onSignUp,
+  isOpen,
+  formSignUpErrors,
+  switchModal,
+}) {
+  const [email, setEmail] = useState("");
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    formSignUpErrors.name = "";
+  };
 
-    const [email, setEmail] = useState("");
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-        formSignUpErrors.name = "";
-    };
+  const [password, setPassword] = useState("");
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    formSignUpErrors.name = "";
+  };
 
-    const [password, setPassword] = useState("");
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-        formSignUpErrors.name = "";
-    };
+  const [name, setName] = useState("");
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+    formSignUpErrors.name = "";
+  };
 
-    const [name, setName] = useState("");
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-        formSignUpErrors.name = "";
-    };
+  const [avatar, setAvatar] = useState("");
+  const handleAvatarChange = (event) => {
+    setAvatar(event.target.value);
+    formSignUpErrors.name = "";
+  };
 
-    const [avatar, setAvatar] = useState("");
-    const handleAvatarChange = (event) => {
-        setAvatar(event.target.value);
-        formSignUpErrors.name = "";
-    };
-
-    const handleSubmit = async(event) => {
-        event.preventDefault();
-        if(await onSignUp(event,{email, password, name, avatar})){
-            setEmail("");
-            setPassword("");
-            setName("");
-            setAvatar("");
-        }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (await onSignUp(event, { email, password, name, avatar })) {
+      setEmail("");
+      setPassword("");
+      setName("");
+      setAvatar("");
     }
+  };
 
-    return (
-        <ModalWithForm
+  return (
+    <ModalWithForm
       title="Sign Up"
       buttonText="Sign Up"
       closeModal={closeModal}
@@ -49,10 +54,10 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
       switchModal={switchModal}
       modal={"login"}
     >
-        {formSignUpErrors.errors && (
-          <p className="modal__error">{formSignUpErrors.errors}</p>
-        )}
-    <label  className="modal__label">
+      {formSignUpErrors.errors && (
+        <p className="modal__error">{formSignUpErrors.errors}</p>
+      )}
+      <label className="modal__label">
         Email *
         <input
           type="email"
@@ -65,9 +70,9 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
         {formSignUpErrors.email && (
           <p className="modal__error">This field is required</p>
         )}
-    </label>
-    <label  className="modal__label">
-    Password *
+      </label>
+      <label className="modal__label">
+        Password *
         <input
           type="password"
           className="modal__input"
@@ -79,8 +84,8 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
         {formSignUpErrors.password && (
           <p className="modal__error">This field is required</p>
         )}
-    </label>
-    <label className="modal__label">
+      </label>
+      <label className="modal__label">
         Name *
         <input
           type="text"
@@ -94,7 +99,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
           <p className="modal__error">This field is required</p>
         )}
       </label>
-      <label  className="modal__label">
+      <label className="modal__label">
         Avatar URL *
         <input
           type="text"
@@ -110,7 +115,7 @@ function RegisterModal ({ closeModal, onSignUp, isOpen, formSignUpErrors, switch
         )}
       </label>
     </ModalWithForm>
-    )
+  );
 }
 
 export default RegisterModal;

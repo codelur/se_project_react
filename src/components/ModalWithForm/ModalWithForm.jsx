@@ -9,12 +9,11 @@ function ModalWithForm({
   onSubmit,
   altButtonText,
   switchModal,
-  modal
+  modal,
 }) {
-
   const changeModal = () => {
-    switchModal(modal)
-  }
+    switchModal(modal);
+  };
   return (
     <div className={`modal  ${isOpen && "modal_opened"}`}>
       <div className={`modal__content modal__${name}`}>
@@ -31,13 +30,18 @@ function ModalWithForm({
         >
           {children}
           <div className="modal__buttons">
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
-          {altButtonText && <button type="button" className="modal__alt"
-          onClick={changeModal}>
-            {altButtonText}
-          </button>}
+            <button type="submit" className="modal__submit">
+              {buttonText}
+            </button>
+            {altButtonText && (
+              <button
+                type="button"
+                className="modal__alt"
+                onClick={changeModal}
+              >
+                {altButtonText}
+              </button>
+            )}
           </div>
         </form>
       </div>

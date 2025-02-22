@@ -13,7 +13,7 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass, userInitial }) {
     };
     image.onerror = () => {
       setIsLoading(false);
-      if (alternativeSrc!=undefined) setImageUrl(alternativeSrc);
+      if (alternativeSrc != undefined) setImageUrl(alternativeSrc);
     };
   });
 
@@ -21,10 +21,10 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass, userInitial }) {
     <>
       {isLoading ? (
         <div></div>
+      ) : imageUrl != undefined ? (
+        <img src={imageUrl} alt={alt} className={imageClass} />
       ) : (
-        imageUrl!=undefined?
-        (<img src={imageUrl} alt={alt} className={imageClass} />)
-        : (<div className={imageClass}>{userInitial}</div>)
+        <div className={imageClass}>{userInitial}</div>
       )}
     </>
   );

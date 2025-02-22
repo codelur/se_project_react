@@ -1,16 +1,20 @@
-
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
-  const { values, handleChange, isValid,  resetForm } =
-    useFormAndValidation();
+  const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (isValid)
-      if (await onAddItem(event, { name: values.name, imageUrl: values.imageUrl, weather: values.weather })) {
-        resetForm()
+      if (
+        await onAddItem(event, {
+          name: values.name,
+          imageUrl: values.imageUrl,
+          weather: values.weather,
+        })
+      ) {
+        resetForm();
       }
   };
 

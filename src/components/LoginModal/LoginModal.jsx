@@ -1,11 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function LoginModal({closeModal, onLogin, isOpen, formLoginErrors, switchModal}){
 
-    useEffect(() => {
-        console.log("formLoginErrors changed:", formLoginErrors);
-      }, [formLoginErrors]);
     const [email, setEmail] = useState("");
     const handleEmailChange = (event) => {
         setEmail(event.target.value);

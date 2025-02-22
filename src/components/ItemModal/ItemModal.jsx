@@ -2,7 +2,7 @@ import "./ItemModal.css";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { useContext } from "react"; 
+import { useContext } from "react";
 
 function ItemModal({
   closeModal,
@@ -12,7 +12,6 @@ function ItemModal({
   openConfirmationModal,
   activeModal,
 }) {
-
   const { currentUser } = useContext(CurrentUserContext);
   const isOwn = card.owner === currentUser._id;
 
@@ -45,8 +44,8 @@ function ItemModal({
               >
                 Delete item
               </button>
-            </div>)
-          }
+            </div>
+          )}
         </div>
       </div>
       <ConfirmationModal

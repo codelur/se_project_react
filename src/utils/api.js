@@ -4,7 +4,7 @@ function getFirstAvailableId() {
   return Math.random();
 }
 
-async function  checkResponse(res) {
+async function checkResponse(res) {
   if (res.ok) {
     return res.json();
   }
@@ -36,57 +36,56 @@ async function addItem(data, token) {
 }
 
 function deleteItem(id, token) {
-  return fetch(`${baseUrl}/items/${id}`, { 
+  return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
-      "Authorization": `Bearer ${token}`, 
-      "Content-Type": "application/json" 
-    }
-  }).then(
-    checkResponse
-  );
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
 }
 
-function editProfile  ( {name, avatar},token) {
-    return fetch(`${baseUrl}/users/me`, {
-        method: "PATCH",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name, avatar})
-    })
-    .then(
-      checkResponse
-    );
-        
+function editProfile({ name, avatar }, token) {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then(checkResponse);
 }
 
-function addCardLike(id, token){
+function addCardLike(id, token) {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-    }
-  }).then(
-    checkResponse
-  );
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 }
 
-function removeCardLike (id, token){
+function removeCardLike(id, token) {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-    }
-  }).then(
-    checkResponse
-  );
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 }
 
-export { getItems, addItem, deleteItem, getFirstAvailableId, editProfile, addCardLike, removeCardLike, checkResponse };
+export {
+  getItems,
+  addItem,
+  deleteItem,
+  getFirstAvailableId,
+  editProfile,
+  addCardLike,
+  removeCardLike,
+  checkResponse,
+};

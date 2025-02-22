@@ -22,8 +22,8 @@ import {
   deleteItem,
   getFirstAvailableId,
   editProfile,
-  addCardLike, 
-  removeCardLike
+  addCardLike,
+  removeCardLike,
 } from "../../utils/api";
 import { register, signin, checkJWT } from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
@@ -43,7 +43,12 @@ function App() {
     conditionCode: 0,
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ username: "", email: "", avatar: "", _id: "" });
+  const [currentUser, setCurrentUser] = useState({
+    username: "",
+    email: "",
+    avatar: "",
+    _id: "",
+  });
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({ link: "" });
@@ -55,13 +60,13 @@ function App() {
   const [formSignUpErrors, setFormSignUpErrors] = useState({});
   const [formLoginErrors, setFormLoginErrors] = useState({});
   const [formEditProfileErrors, setFormEditProfileErrors] = useState({});
-  
+
   //adding effect to close modals when pressing escape key
   useEffect(() => {
-
     if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
 
-    const handleEscClose = (e) => {  // define the function inside useEffect not to lose the reference on rerendering
+    const handleEscClose = (e) => {
+      // define the function inside useEffect not to lose the reference on rerendering
       if (e.key === "Escape") {
         closeModal();
       }
@@ -69,25 +74,30 @@ function App() {
 
     document.addEventListener("keydown", handleEscClose);
 
-    return () => {  // don't forget to add a clean up function for removing the listener
+    return () => {
+      // don't forget to add a clean up function for removing the listener
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
 
-  useEffect(() =>{
+  useEffect(() => {
     const jwt = getToken();
-    
+
     if (!jwt) {
       return;
     }
-    checkJWT ({token: jwt})
-    .then(({data})=>{
-      setCurrentUser({ username: data.name, email: data.email, avatar: data.avatar, _id: data._id });
-      setIsLoggedIn(true);
-    })
-    .catch(console.error);
-
-  },[])
+    checkJWT({ token: jwt })
+      .then(({ data }) => {
+        setCurrentUser({
+          username: data.name,
+          email: data.email,
+          avatar: data.avatar,
+          _id: data._id,
+        });
+        setIsLoggedIn(true);
+      })
+      .catch(console.error);
+  }, []);
   const handleAddGarmentClick = () => {
     setActiveModal("add-garment");
     setIsMobileMenuOpened(false);
@@ -110,7 +120,7 @@ function App() {
 
   const switchModal = (name) => {
     setActiveModal(name);
-  }
+  };
 
   const handleCardClick = (card) => {
     setActiveModal("see-preview");
@@ -142,15 +152,15 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const handleLogOut = () =>{
+  const handleLogOut = () => {
     setIsLoggedIn(false);
     setCurrentUser({ username: "", email: "", avatar: "", _id: "" });
     removeToken();
-  }
+  };
 
   const getClothingItems = () => {
     getItems()
-      .then(({data}) => {
+      .then(({ data }) => {
         setClothingItems(data);
       })
       .catch(console.error);
@@ -171,9 +181,9 @@ function App() {
     // Check if this card is not currently liked
     !isLiked
       ? // if so, send a request to add the user's id to the card's likes array
-        
-          // the first argument is the card's id
-          addCardLike(id, token)
+
+        // the first argument is the card's id
+        addCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard.data : item))
@@ -181,9 +191,9 @@ function App() {
           })
           .catch((err) => console.log(err))
       : // if not, send a request to remove the user's id from the card's likes array
-        
-          // the first argument is the card's id
-          removeCardLike(id, token) 
+
+        // the first argument is the card's id
+        removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard.data : item))
@@ -192,7 +202,7 @@ function App() {
           .catch((err) => console.log(err));
   };
 
-  const loginSubmit =  async (event, item) =>{
+  const loginSubmit = async (event, item) => {
     event.preventDefault();
 
     let hasErrors = false;
@@ -205,35 +215,36 @@ function App() {
       }
     }
 
-    if (hasErrors)
-      setFormLoginErrors(errors);
+    if (hasErrors) setFormLoginErrors(errors);
     if (!hasErrors) {
-      try{
-        
+      try {
         const res = await signin(item);
         if (res.status && res.status === 401) {
           setFormLoginErrors({ ...errors, login: "Invalid credentials" });
           return false;
         }
-        
-        setActiveModal("");
-        setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
+
+        closeModal();
+        setCurrentUser({
+          username: res.name,
+          email: res.email,
+          avatar: res.avatar,
+          _id: res._id,
+        });
         setToken(res.token);
         setIsLoggedIn(true);
         setFormLoginErrors({});
         return true;
-
-      }catch(error){
+      } catch (error) {
         console.log(error);
         return false;
-      };
-
+      }
     }
 
     return false;
-  }
+  };
 
-  const signUpSubmit = async (event, item) =>{
+  const signUpSubmit = async (event, item) => {
     event.preventDefault();
 
     let hasErrors = false;
@@ -249,62 +260,66 @@ function App() {
     setFormSignUpErrors(errors);
     if (!hasErrors) {
       const res = await register(item);
-      if(!res.message){
-        setActiveModal("");
+      if (!res.message) {
+        closeModal();
         return true;
-      }
-      else{
+      } else {
         setFormSignUpErrors({ ...errors, errors: res.message });
-      return false;};
-
+        return false;
+      }
     }
 
     return false;
-  }
+  };
 
   const editProfileSubmit = async (event, item) => {
     event.preventDefault();
 
-      await editProfile(item, getToken())
-        .then((res) => {
-          setActiveModal("");
-          setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
-          setFormEditProfileErrors({})
-          return true;
-        })
-        .catch(error=>{
-          console.error(error);
-          setFormEditProfileErrors(prevErrors => ({
-            ...prevErrors,
-            error: error.split("failed: ")[1]
-          }));
+    await editProfile(item, getToken())
+      .then((res) => {
+        closeModal();
+        setCurrentUser({
+          username: res.name,
+          email: res.email,
+          avatar: res.avatar,
+          _id: res._id,
         });
-    
+        setFormEditProfileErrors({});
+        return true;
+      })
+      .catch((error) => {
+        console.error(error);
+        setFormEditProfileErrors((prevErrors) => ({
+          ...prevErrors,
+          error: error.split("failed: ")[1],
+        }));
+      });
+
     return false;
-  }
+  };
 
   const handleAddItem = async (event, item) => {
     event.preventDefault();
 
-      const id = getFirstAvailableId(clothingItems);
-      item._id = id;
+    const id = getFirstAvailableId(clothingItems);
+    item._id = id;
 
-      try{
-        const { data } = await addItem(item, getToken());
-        setActiveModal("");
-        item._id = data._id;
-        item.owner = data.owner;
-        item.likes = [];
-        setClothingItems([item, ...clothingItems]);
-        setFormAddItemErrors({});
-        return true;
-      }catch (error) {
-        console.error("Error:", error.message);
-        setFormAddItemErrors(prevErrors => ({
-          ...prevErrors,
-          error: error.message.split("failed: ")[1]
-        }));
-      };
+    try {
+      const { data } = await addItem(item, getToken());
+      closeModal();
+      item._id = data._id;
+      item.owner = data.owner;
+      item.likes = [];
+      setClothingItems([item, ...clothingItems]);
+      setFormAddItemErrors({});
+      return true;
+    } catch (error) {
+      console.error("Error:", error.message);
+      setFormAddItemErrors((prevErrors) => ({
+        ...prevErrors,
+        error: error.message.split("failed: ")[1],
+      }));
+    }
 
     return false;
   };
@@ -312,7 +327,7 @@ function App() {
   const onDeleteItem = (id) => {
     deleteItem(id, getToken())
       .then(() => {
-        setActiveModal("");
+        closeModal();
         const newclothingItems = clothingItems.filter(
           (item) => item._id !== id
         );
@@ -322,7 +337,9 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={{currentUser, isLoggedIn, setIsLoggedIn}}>
+    <CurrentUserContext.Provider
+      value={{ currentUser, isLoggedIn, setIsLoggedIn }}
+    >
       <div className="page">
         <div className="page__content">
           <CurrentTemperatureUnitContext.Provider
@@ -349,11 +366,11 @@ function App() {
                   />
                 }
               ></Route>
-              
-                <Route
-                  path="/profile"
-                  element={
-                    <ProtectedRoute  anonymous={!isLoggedIn}>
+
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute anonymous={!isLoggedIn}>
                     <Profile
                       handleCardClick={handleCardClick}
                       handleAddGarmentClick={handleAddGarmentClick}
@@ -362,10 +379,9 @@ function App() {
                       handleLogOut={handleLogOut}
                       handleCardLike={handleCardLike}
                     />
-                    </ProtectedRoute>
-                  }
-                />
-              
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
             <ItemModal
               closeModal={closeModal}
@@ -381,26 +397,25 @@ function App() {
               onAddItem={handleAddItem}
               formAddItemErrors={formAddItemErrors}
             />
-            <RegisterModal 
+            <RegisterModal
               closeModal={closeModal}
               onSignUp={signUpSubmit}
               isOpen={activeModal === "signup"}
               formSignUpErrors={formSignUpErrors}
               switchModal={switchModal}
             />
-            <LoginModal 
+            <LoginModal
               closeModal={closeModal}
               onLogin={loginSubmit}
               isOpen={activeModal === "login"}
               formLoginErrors={formLoginErrors}
               switchModal={switchModal}
             />
-            <EditProfileModal 
-            closeModal={closeModal}
-            onEdit={editProfileSubmit}
-            isOpen={activeModal === "edit-profile"}
-            formEditProfileErrors={formEditProfileErrors}
-            
+            <EditProfileModal
+              closeModal={closeModal}
+              onEdit={editProfileSubmit}
+              isOpen={activeModal === "edit-profile"}
+              formEditProfileErrors={formEditProfileErrors}
             />
             <Footer />
           </CurrentTemperatureUnitContext.Provider>
