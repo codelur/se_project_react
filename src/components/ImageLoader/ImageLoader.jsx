@@ -13,6 +13,7 @@ function ImageLoader({ src, alternativeSrc, alt, imageClass, userInitial }) {
     };
     image.onerror = () => {
       setIsLoading(false);
+      setImageUrl(undefined);
       if (alternativeSrc != undefined) setImageUrl(alternativeSrc);
     };
   });
