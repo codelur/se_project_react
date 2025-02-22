@@ -55,6 +55,7 @@ function App() {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formAddItemErrors, setFormAddItemErrors] = useState({});
   const [formSignUpErrors, setFormSignUpErrors] = useState({});
@@ -282,7 +283,7 @@ function App() {
 
   const editProfileSubmit = async (event, item) => {
     event.preventDefault();
-
+    setIsLoading(true);
     await editProfile(item, getToken())
       .then((res) => {
         closeModal();
@@ -301,6 +302,8 @@ function App() {
           ...prevErrors,
           error: error.split("failed: ")[1],
         }));
+      }).finally(() => {
+        setIsLoading(false);
       });
 
     return false;
@@ -308,7 +311,7 @@ function App() {
 
   const handleAddItem = async (event, item) => {
     event.preventDefault();
-
+    setIsLoading(true);
     const id = getFirstAvailableId(clothingItems);
     item._id = id;
 
@@ -327,6 +330,8 @@ function App() {
         ...prevErrors,
         error: error.message.split("failed: ")[1],
       }));
+    }finally{
+      setIsLoading(false);
     }
 
     return false;
@@ -404,6 +409,7 @@ function App() {
               isOpen={activeModal === "add-garment"}
               onAddItem={handleAddItem}
               formAddItemErrors={formAddItemErrors}
+              isLoading={isLoading}
             />
             <RegisterModal
               closeModal={closeModal}
@@ -424,6 +430,7 @@ function App() {
               onEdit={editProfileSubmit}
               isOpen={activeModal === "edit-profile"}
               formEditProfileErrors={formEditProfileErrors}
+              isLoading={isLoading}
             />
             <Footer />
           </CurrentTemperatureUnitContext.Provider>

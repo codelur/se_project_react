@@ -8,6 +8,7 @@ function EditProfileModal({
   onEdit,
   isOpen,
   formEditProfileErrors,
+  isLoading,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
   const { values, handleChange, isValid, setValues } = useFormAndValidation();
@@ -29,6 +30,7 @@ function EditProfileModal({
       name="edit-profile"
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
     >
       {formEditProfileErrors.error && (
         <p className="modal__error">{formEditProfileErrors.error}</p>

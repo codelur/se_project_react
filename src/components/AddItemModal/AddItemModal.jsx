@@ -1,7 +1,7 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
+function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors, isLoading }) {
   const { values, handleChange, isValid, resetForm } = useFormAndValidation();
 
   const handleSubmit = async (event) => {
@@ -26,6 +26,7 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
       name="add-garment"
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
     >
       {formAddItemErrors.error && (
         <p className="modal__error">{formAddItemErrors.error}</p>

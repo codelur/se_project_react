@@ -10,6 +10,7 @@ function ModalWithForm({
   altButtonText,
   switchModal,
   modal,
+  isLoading,
 }) {
   const changeModal = () => {
     switchModal(modal);
@@ -31,7 +32,7 @@ function ModalWithForm({
           {children}
           <div className="modal__buttons">
             <button type="submit" className="modal__submit">
-              {buttonText}
+            {isLoading? 'Saving...' : buttonText}
             </button>
             {altButtonText && (
               <button
