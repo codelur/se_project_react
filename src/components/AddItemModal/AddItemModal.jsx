@@ -1,32 +1,17 @@
-import { useState } from "react";
+
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
-  const [name, setName] = useState("");
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-    formAddItemErrors.name = "";
-  };
-
-  const [imageUrl, setImageUrl] = useState("");
-  const handleImageUrlChange = (event) => {
-    setImageUrl(event.target.value);
-    formAddItemErrors.imageUrl = "";
-  };
-
-  const [weather, setWeather] = useState("");
-  const handleWeatherChange = (event) => {
-    setWeather(event.target.id);
-    formAddItemErrors.weather = "";
-  };
+  const { values, handleChange, isValid,  resetForm } =
+    useFormAndValidation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (await onAddItem(event, { name, imageUrl, weather })) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
-    }
+    if (isValid)
+      if (await onAddItem(event, { name: values.name, imageUrl: values.imageUrl, weather: values.weather })) {
+        resetForm()
+      }
   };
 
   return (
@@ -39,8 +24,8 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
       onSubmit={handleSubmit}
     >
       {formAddItemErrors.error && (
-          <p className="modal__error">{formAddItemErrors.error}</p>
-        )}
+        <p className="modal__error">{formAddItemErrors.error}</p>
+      )}
       <label htmlFor="name" className="modal__label">
         Name
         <input
@@ -49,8 +34,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
           id="name"
           name="name"
           placeholder="Name"
-          onChange={handleNameChange}
-          value={name}
+          onChange={handleChange}
+          value={values.name || ""}
+          required
         />
         {formAddItemErrors.name && (
           <p className="modal__error">This field is required</p>
@@ -64,8 +50,9 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
           id="imageUrl"
           name="imageUrl"
           placeholder="Image URL"
-          onChange={handleImageUrlChange}
-          value={imageUrl}
+          onChange={handleChange}
+          value={values.imageUrl || ""}
+          required
         />
         {formAddItemErrors.imageUrl && (
           <p className="modal__error">This field is required</p>
@@ -77,10 +64,12 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
           <input
             type="radio"
             id="hot"
+            value="hot"
             name="weather"
             className="modal__input_type_radio"
-            onChange={handleWeatherChange}
-            checked={weather === "hot"}
+            onChange={handleChange}
+            checked={values.weather === "hot"}
+            required
           ></input>
           Hot
         </label>
@@ -88,10 +77,11 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
           <input
             type="radio"
             id="warm"
+            value="warm"
             name="weather"
             className="modal__input_type_radio"
-            onChange={handleWeatherChange}
-            checked={weather === "warm"}
+            onChange={handleChange}
+            checked={values.weather === "warm"}
           />
           Warm
         </label>
@@ -99,10 +89,11 @@ function AddItemModal({ closeModal, onAddItem, isOpen, formAddItemErrors }) {
           <input
             type="radio"
             id="cold"
+            value="cold"
             name="weather"
             className="modal__input_type_radio"
-            onChange={handleWeatherChange}
-            checked={weather === "cold"}
+            onChange={handleChange}
+            checked={values.weather === "cold"}
           ></input>
           Cold
         </label>

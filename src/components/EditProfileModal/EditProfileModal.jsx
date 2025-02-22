@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function EditProfileModal({
   closeModal,
@@ -9,27 +10,15 @@ function EditProfileModal({
   formEditProfileErrors,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
+  const { values, handleChange, isValid , setValues} = useFormAndValidation();
 
   useEffect(() => {
-    setName(currentUser.username);
-    setAvatar(currentUser.avatar);
-  }, [currentUser]);
-
-  const [name, setName] = useState(currentUser.username);
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-    formEditProfileErrors.name = "";
-  };
-
-  const [avatar, setAvatar] = useState(currentUser.avatar);
-  const handleAvatarChange = (event) => {
-    setAvatar(event.target.value);
-    formEditProfileErrors.name = "";
-  };
+    setValues({ name: currentUser.username, avatar: currentUser.avatar })
+  },[currentUser]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onEdit(event, { name, avatar })
+    if (isValid) onEdit(event, { name: values.name, avatar: values.avatar });
   };
 
   return (
@@ -51,8 +40,9 @@ function EditProfileModal({
           className="modal__input"
           name="name"
           placeholder="Name"
-          onChange={handleNameChange}
-          value={name}
+          onChange={handleChange}
+          value={values.name || ""}
+          required
         />
         {formEditProfileErrors.name && (
           <p className="modal__error">This field is required</p>
@@ -65,8 +55,8 @@ function EditProfileModal({
           className="modal__input"
           name="avatar"
           placeholder="Avatar Url"
-          onChange={handleAvatarChange}
-          value={avatar}
+          onChange={handleChange}
+          value={values.avatar || ""}
         />
         {formEditProfileErrors.avatar && (
           <p className="modal__error">This field is required</p>

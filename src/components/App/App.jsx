@@ -265,24 +265,11 @@ function App() {
   const editProfileSubmit = async (event, item) => {
     event.preventDefault();
 
-    let hasErrors = false;
-    const errors = {};
-
-    for (const field in item) {
-      if (!item[field]) {
-        errors[field] = `${field} is required`;
-        hasErrors = true;
-      }
-    }
-
-    setFormEditProfileErrors(errors);
-    if (!hasErrors) {
-
       await editProfile(item, getToken())
         .then((res) => {
           setActiveModal("");
           setCurrentUser({ username: res.name, email: res.email, avatar: res.avatar, _id: res._id });
-
+          setFormEditProfileErrors({})
           return true;
         })
         .catch(error=>{
@@ -292,25 +279,13 @@ function App() {
             error: error.split("failed: ")[1]
           }));
         });
-    }
+    
     return false;
   }
 
-  const validateForm = async (event, item) => {
+  const handleAddItem = async (event, item) => {
     event.preventDefault();
 
-    let hasErrors = false;
-    const errors = {};
-
-    for (const field in item) {
-      if (!item[field]) {
-        errors[field] = `${field} is required`;
-        hasErrors = true;
-      }
-    }
-
-    setFormAddItemErrors(errors);
-    if (!hasErrors) {
       const id = getFirstAvailableId(clothingItems);
       item._id = id;
 
@@ -321,6 +296,7 @@ function App() {
         item.owner = data.owner;
         item.likes = [];
         setClothingItems([item, ...clothingItems]);
+        setFormAddItemErrors({});
         return true;
       }catch (error) {
         console.error("Error:", error.message);
@@ -329,7 +305,7 @@ function App() {
           error: error.message.split("failed: ")[1]
         }));
       };
-    }
+
     return false;
   };
 
@@ -402,7 +378,7 @@ function App() {
             <AddItemModal
               closeModal={closeModal}
               isOpen={activeModal === "add-garment"}
-              onAddItem={validateForm}
+              onAddItem={handleAddItem}
               formAddItemErrors={formAddItemErrors}
             />
             <RegisterModal 
