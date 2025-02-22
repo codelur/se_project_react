@@ -56,7 +56,23 @@ function App() {
   const [formLoginErrors, setFormLoginErrors] = useState({});
   const [formEditProfileErrors, setFormEditProfileErrors] = useState({});
   
+  //adding effect to close modals when pressing escape key
+  useEffect(() => {
 
+    if (!activeModal) return; // stop the effect not to add the listener if there is no active modal
+
+    const handleEscClose = (e) => {  // define the function inside useEffect not to lose the reference on rerendering
+      if (e.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {  // don't forget to add a clean up function for removing the listener
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   useEffect(() =>{
     const jwt = getToken();
