@@ -228,10 +228,6 @@ function App() {
     if (!hasErrors) {
       try {
         const res = await signin(item);
-        if (res.status && res.status === 401) {
-          setFormLoginErrors({ ...errors, login: "Invalid credentials" });
-          return false;
-        }
 
         closeModal();
         setCurrentUser({
@@ -246,6 +242,7 @@ function App() {
         return true;
       } catch (error) {
         console.log(error);
+        setFormLoginErrors({ ...errors, login: "Invalid credentials" });
         return false;
       }
     }
@@ -268,14 +265,21 @@ function App() {
 
     setFormSignUpErrors(errors);
     if (!hasErrors) {
-      const res = await register(item);
-      if (!res.message) {
-        closeModal();
-        return true;
-      } else {
-        setFormSignUpErrors({ ...errors, errors: res.message });
+      try{
+        const res = await register(item);
+        if (!res.message) {
+          closeModal();
+          return true;
+        } else {
+          setFormSignUpErrors({ ...errors, errors: res.message });
+          return false;
+        }
+      } catch (error) {
+        console.log(error);
+        setFormSignUpErrors({ ...errors, errors: error.replace(/^Error\s\d+\s/, "") });
         return false;
       }
+        
     }
 
     return false;
