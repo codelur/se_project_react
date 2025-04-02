@@ -3,7 +3,6 @@ import "./Header.css";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-import { avatarSrc, altAvatarSrc } from "../../utils/constants";
 import logo from "../../assets/logo.svg";
 
 import ImageLoader from "../ImageLoader/ImageLoader";
