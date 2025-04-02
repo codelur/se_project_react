@@ -4,6 +4,11 @@
 
 The idea of the application is pretty simple - we make a call to an API, which then responds with the daily weather forecast. We collect the weather data, process it, and then based on the forecast, we recommend suitable clothing to the user.
 
+## Live Demo
+The project is hosted at: https://www.codelurwtwr.jumpingcrab.com/
+
+[Visit the website](https://www.codelurwtwr.jumpingcrab.com/)
+
 ### Backend repository:
 [Repository](https://github.com/codelur/se_project_express)
 
